@@ -3,15 +3,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/JavaScript.js to edit this template
  */
 function mostrarConfirmacion(event) {
-    event.preventDefault();
+    event.preventDefault(); // Detiene el envío del formulario
 
     var nombre = document.getElementById('nombre').value;
     var email = document.getElementById('email').value;
     var password = document.getElementById('password').value;
     var telefono = document.getElementById('telefono').value;
+    var fecha = document.getElementById('fecha').value;
 
     if (nombre.trim() === "") {
-        mostrarAlerta("El nombre del producto es obligatorio.");
+        mostrarAlerta("El nombre del cliente es obligatorio.");
         return false;
     }
     if (email.trim() === "") {
@@ -23,11 +24,16 @@ function mostrarConfirmacion(event) {
         return false;
     }
     if (telefono.trim() === "") {
-        mostrarAlerta("El telefono del cliente es obligatorio.");
+        mostrarAlerta("El teléfono del cliente es obligatorio.");
+        return false;
+    }
+    if (!fecha) {
+        mostrarAlerta("La fecha de nacimiento del cliente es obligatoria.");
         return false;
     }
 
-    document.getElementById('confirmModal').style.display = 'flex';
+    // Si todo es válido, se envía el formulario
+    event.target.submit();
 }
 
 function mostrarAlerta(mensaje, tipo = 'error') {
@@ -35,18 +41,11 @@ function mostrarAlerta(mensaje, tipo = 'error') {
     alerta.innerText = mensaje;
 
     alerta.className = 'alerta';
-
-    if (tipo === 'error') {
-        alerta.classList.add('alerta-error');
-    } else if (tipo === 'exito') {
-        alerta.classList.add('alerta-exito');
-    }
-
+    alerta.classList.add(tipo === 'error' ? 'alerta-error' : 'alerta-exito');
     alerta.style.display = 'block';
 
     setTimeout(() => {
         alerta.style.display = 'none';
-    }, 8000);
+    }, 4000);
 }
-
 

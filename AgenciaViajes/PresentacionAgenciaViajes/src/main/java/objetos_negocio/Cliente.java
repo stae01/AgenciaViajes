@@ -4,6 +4,8 @@
  */
 package objetos_negocio;
 
+import java.time.LocalDate;
+
 /**
  *
  * @author user
@@ -14,12 +16,30 @@ public class Cliente {
     private String email;
     private String password;
     private String telefono;
+    private LocalDate fechaNacimiento;
+    private boolean isAdmin;
 
-    public Cliente(String nombre, String email, String password, String telefono) {
+    public Cliente(String nombre, String email, String password, String telefono, LocalDate fechaNacimiento) {
         this.nombre = nombre;
         this.email = email;
         this.password = password;
         this.telefono = telefono;
+        this.fechaNacimiento = fechaNacimiento;
+    }
+ public Cliente(String nombre, String email, String password, String telefono, boolean isAdmin) {
+        this.nombre = nombre;
+        this.email = email;
+        this.password = password;
+        this.telefono = telefono;
+        this.isAdmin=isAdmin;
+    }
+
+    public boolean isIsAdmin() {
+        return isAdmin;
+    }
+
+    public void setIsAdmin(boolean isAdmin) {
+        this.isAdmin = isAdmin;
     }
 
     public String getNombre() {
@@ -54,6 +74,14 @@ public class Cliente {
         this.telefono = telefono;
     }
 
+    public LocalDate getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    public void setFechaNacimiento(LocalDate fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
+
     @Override
     public int hashCode() {
         int hash = 7;
@@ -71,8 +99,10 @@ public class Cliente {
 
     @Override
     public String toString() {
-        return "Cliente{" + "nombre=" + nombre + ", email=" + email + ", password=" + password + ", telefono=" + telefono + '}';
+        return "Cliente{" + "nombre=" + nombre + ", email=" + email + ", password=" + password + ", telefono=" + telefono + ", fechaNacimiento=" + fechaNacimiento + '}';
     }
+
+
 }
 
 
