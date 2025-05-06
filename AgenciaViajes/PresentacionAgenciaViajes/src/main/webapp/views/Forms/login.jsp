@@ -14,6 +14,12 @@
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         
+        if ("admin".equals(email) && "admin123".equals(password)) {
+            session.setAttribute("admin", true);
+            response.sendRedirect("admin.jsp");
+            return;
+        }
+        
         Cliente clienteAutenticado = ControlClientes.autenticar(email, password);
 
         if (clienteAutenticado != null) {
@@ -23,7 +29,6 @@
             }else{
                 response.sendRedirect("index.jsp");
             }
-            
             return;
         } else {
             request.setAttribute("errorLogin", "Correo o contraseña incorrectos");
@@ -33,42 +38,43 @@
 
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <title>Login - Good Riddance</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/formulario.css?v=<%= System.currentTimeMillis()%>">
-</head>
-<body>
-    <header class="header">
-        <img src="${pageContext.request.contextPath}/images/logo.png" alt="Logo" class="logo">
-    </header>
+    <head>
+        <meta charset="UTF-8">
+        <title>Login - Good Riddance</title>
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/formulario.css?v=<%= System.currentTimeMillis()%>">
+    </head>
+    <body>
+        <header class="header">
+            <img src="${pageContext.request.contextPath}/images/logo.png" alt="Logo" class="logo">
+        </header>
 
-    <main class="main-content">
-        <div class="content-container">
-            <div class="form-panel">
-                <h2 class="menu-title">Iniciar Sesión</h2>
+        <main class="main-content">
+            <div class="content-container">
+                <div class="form-panel">
+                    <h2 class="menu-title">Iniciar Sesión</h2>
 
-                <% if (request.getAttribute("errorLogin") != null) { %>
+                    <% if (request.getAttribute("errorLogin") != null) { %>
                     <p style="color: red;"><%= request.getAttribute("errorLogin") %></p>
-                <% } %>
+                    <% } %>
 
-                <form action="login.jsp" method="POST">
-                    <input type="hidden" name="accion" value="login">
-                    <div class="form-group">
-                        <label for="email">Correo:</label>
-                        <input class="form-input" type="text" name="email" required placeholder="Correo electrónico">
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Contraseña:</label>
-                        <input class="form-input" type="password" name="password" required placeholder="Contraseña">
-                    </div>
-                    <div class="form-buttons">
-                        <button type="submit" class="menu-button btn-guardar">Entrar</button>
-                        <button type="button" class="menu-button btn-cancelar" onclick="window.location.href='index.jsp'">Cancelar</button>
-                    </div>
-                </form>
+                    <form action="login.jsp" method="POST">
+                        <input type="hidden" name="accion" value="login">
+                        <div class="form-group">
+                            <label for="email">Correo:</label>
+                            <input class="form-input" type="text" name="email" required placeholder="Correo electrónico">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Contraseña:</label>
+                            <input class="form-input" type="password" name="password" required placeholder="Contraseña">
+                        </div>
+                        <div class="form-buttons">
+                            <button type="submit" class="menu-button btn-guardar">Entrar</button>
+                            <!--<button type="button" class="menu-button btn-cancelar" onclick="window.location.href = 'index.jsp'">Cancelar</button>-->
+                            <button type="button" class="menu-button btn-registro" onclick="window.location.href = 'registraClienteForm.jsp'">Registrarse</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-        </div>
-    </main>
-</body>
+        </main>
+    </body>
 </html>
