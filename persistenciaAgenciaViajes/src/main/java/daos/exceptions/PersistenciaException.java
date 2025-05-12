@@ -9,11 +9,11 @@ package daos.exceptions;
  * @author 
  */
 
-public class PreexistingEntityException extends Exception {
-    public PreexistingEntityException(String message, Throwable cause) {
+public class PersistenciaException extends Exception {
+    public PersistenciaException(String message, Throwable cause) {
         super(message, cause);
     }
-    public PreexistingEntityException(String message) {
+    public PersistenciaException(String message) {
         super(message);
     }
 }
