@@ -4,10 +4,16 @@
  */
 package InterfacesFachada;
 
+import entidades.Avion;
+import java.util.List;
+
 /**
  *
  * @author user
  */
 public interface AvionFachada {
-    
+    void crearAvion(Avion avion);
+    void eliminarAvion(Long idAvion);
+    Avion obtenerAvionPorId(Long idAvion);
+    List<Avion> obtenerTodosLosAviones();
 }

@@ -4,10 +4,16 @@
  */
 package InterfacesFachada;
 
+import entidades.Reserva;
+import java.util.List;
+
 /**
  *
  * @author user
  */
 public interface ReservaFachada {
-    
-}
+    Reserva consultarReservaPorId(Long idReserva);
+    List<Reserva> consultarReservasPorIdCliente(Long idCliente);
+    void eliminarReserva(Long idReserva);
+    void registrarReserva(Reserva reserva);
+    }
