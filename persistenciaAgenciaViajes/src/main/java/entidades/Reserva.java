@@ -21,7 +21,7 @@ import javax.persistence.Table;
  * @author Chris
  */
 @Entity
-@Table (name = "Reservas")
+@Table(name = "Reservas")
 public class Reserva implements Serializable {
 
     @Id
@@ -111,11 +111,13 @@ public class Reserva implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Reserva)) {
+        if (!(object instanceof Reserva))
+        {
             return false;
         }
         Reserva other = (Reserva) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)))
+        {
             return false;
         }
         return true;

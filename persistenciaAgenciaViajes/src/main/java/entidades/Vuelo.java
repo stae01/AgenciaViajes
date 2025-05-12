@@ -23,7 +23,7 @@ import javax.persistence.Temporal;
  * @author Chris
  */
 @Entity
-@Table (name = "Vuelos")
+@Table(name = "Vuelos")
 public class Vuelo implements Serializable {
 
     @Id
@@ -140,11 +140,13 @@ public class Vuelo implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Vuelo)) {
+        if (!(object instanceof Vuelo))
+        {
             return false;
         }
         Vuelo other = (Vuelo) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)))
+        {
             return false;
         }
         return true;

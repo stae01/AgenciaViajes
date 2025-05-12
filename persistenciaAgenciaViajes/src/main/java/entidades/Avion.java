@@ -19,7 +19,7 @@ import javax.persistence.Table;
  * @author Chris
  */
 @Entity
-@Table (name = "Aviones")
+@Table(name = "Aviones")
 public class Avion implements Serializable {
 
     @Id
@@ -107,11 +107,13 @@ public class Avion implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Avion)) {
+        if (!(object instanceof Avion))
+        {
             return false;
         }
         Avion other = (Avion) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)))
+        {
             return false;
         }
         return true;
