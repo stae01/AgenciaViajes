@@ -18,7 +18,7 @@
     </head>
     <body>
         <header class="header">
-            <img src="${pageContext.request.contextPath}/images/logo.png" alt="Logo Aerolínea" class="logo">
+             <img src="${pageContext.request.contextPath}/images/logo.png" alt="Logo Good Riddance" class="logo">
         </header>
 
         <main class="main-content">
