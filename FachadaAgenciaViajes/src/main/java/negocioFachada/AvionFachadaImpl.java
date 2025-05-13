@@ -5,6 +5,7 @@
 package negocioFachada;
 
 import InterfacesFachada.AvionFachada;
+import conexion.Conexion;
 import conexion.IConexion;
 import daos.AvionDAO;
 import daos.exceptions.PersistenciaException;
@@ -17,11 +18,13 @@ import java.util.logging.Logger;
  *
  * @author user
  */
-public class AvionFachadaImpl implements AvionFachada{
-    
-private final AvionDAO avionDAO;
+public class AvionFachadaImpl implements AvionFachada {
 
-    public AvionFachadaImpl(IConexion conexion) {
+    private final IConexion conexion;
+    private final AvionDAO avionDAO;
+
+    public AvionFachadaImpl() {
+        this.conexion = new Conexion();
         this.avionDAO = new AvionDAO(conexion);
     }
 

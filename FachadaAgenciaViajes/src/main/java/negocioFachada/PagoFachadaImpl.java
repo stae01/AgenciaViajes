@@ -5,6 +5,7 @@
 package negocioFachada;
 
 import InterfacesFachada.PagoFachada;
+import conexion.Conexion;
 import conexion.IConexion;
 import daos.PagoDAO;
 import daos.exceptions.PersistenciaException;
@@ -18,9 +19,11 @@ import java.util.logging.Logger;
  */
 public class PagoFachadaImpl implements PagoFachada {
 
+    private final IConexion conexion;
     private final PagoDAO pagoDAO;
 
-    public PagoFachadaImpl(IConexion conexion) {
+    public PagoFachadaImpl() {
+        this.conexion = new Conexion();
         this.pagoDAO = new PagoDAO(conexion);
     }
 
@@ -39,7 +42,7 @@ public class PagoFachadaImpl implements PagoFachada {
             return pagoDAO.obtenerPagoPorId(idPago);
         } catch (PersistenciaException e) {
             Logger.getLogger(PagoFachadaImpl.class.getName()).log(Level.SEVERE, "Error al obtener el pago por ID", e);
-            return null; 
+            return null;
         }
     }
 
@@ -49,7 +52,7 @@ public class PagoFachadaImpl implements PagoFachada {
             return pagoDAO.obtenerPagoPorIdReserva(idReserva);
         } catch (PersistenciaException e) {
             Logger.getLogger(PagoFachadaImpl.class.getName()).log(Level.SEVERE, "Error al obtener el pago por ID de reserva", e);
-            return null; 
+            return null;
         }
     }
 

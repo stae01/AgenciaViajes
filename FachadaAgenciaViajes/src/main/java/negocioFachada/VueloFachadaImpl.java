@@ -5,6 +5,7 @@
 package negocioFachada;
 
 import InterfacesFachada.VueloFachada;
+import conexion.Conexion;
 import conexion.IConexion;
 import daos.VueloDAO;
 import daos.exceptions.PersistenciaException;
@@ -20,9 +21,11 @@ import java.util.logging.Logger;
  */
 public class VueloFachadaImpl implements VueloFachada {
 
+    private final IConexion conexion;
     private final VueloDAO vueloDAO;
 
-    public VueloFachadaImpl(IConexion conexion) {
+    public VueloFachadaImpl() {
+        this.conexion = new Conexion();
         this.vueloDAO = new VueloDAO(conexion);
     }
 
@@ -41,7 +44,7 @@ public class VueloFachadaImpl implements VueloFachada {
             return vueloDAO.obtenerVueloPorId(idVuelo);
         } catch (PersistenciaException e) {
             Logger.getLogger(VueloFachadaImpl.class.getName()).log(Level.SEVERE, "Error al obtener vuelo por ID", e);
-            return null; 
+            return null;
         }
     }
 

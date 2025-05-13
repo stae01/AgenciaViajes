@@ -5,6 +5,7 @@
 package negocioFachada;
 
 import InterfacesFachada.ClienteFachada;
+import conexion.Conexion;
 import conexion.IConexion;
 import daos.ClienteDAO;
 import daos.exceptions.NonexistentEntityException;
@@ -20,9 +21,11 @@ import java.util.logging.Logger;
  */
 public class ClienteFachadaImpl implements ClienteFachada {
 
+    private final IConexion conexion;
     private final ClienteDAO clienteDAO;
 
-    public ClienteFachadaImpl(IConexion conexion) {
+    public ClienteFachadaImpl() {
+        this.conexion = new Conexion();
         this.clienteDAO = new ClienteDAO(conexion);
     }
 

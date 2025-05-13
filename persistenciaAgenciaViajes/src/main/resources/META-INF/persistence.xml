@@ -4,9 +4,9 @@
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>entidades.Avion</class>
     <class>entidades.Cliente</class>
-    <class>entidades.Vuelo</class>
-    <class>entidades.Reserva</class>
     <class>entidades.Pago</class>
+    <class>entidades.Reserva</class>
+    <class>entidades.Vuelo</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/agencia_goodRiddance?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

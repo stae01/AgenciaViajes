@@ -28,81 +28,69 @@ public class ClienteDAO {
 
     public void guardarCliente(Cliente cliente) throws PersistenciaException {
         EntityManager em = this.conexion.crearConexion();
-        try
-        {
+        try {
             em.getTransaction().begin();
-
             em.persist(cliente);
-
             em.getTransaction().commit();
-
-            em.close();
-        } catch (Exception e)
-        {
-            if (em.getTransaction().isActive())
-            {
+        } catch (Exception e) {
+            if (em.getTransaction().isActive()) {
                 em.getTransaction().rollback();
             }
             throw new PersistenciaException("No se pudo agregar el cliente a la base de datos: " + e);
-        } finally
-        {
-            em.close();
+        } finally {
+            if (em != null && em.isOpen()) {
+                em.close();
+            }
         }
     }
 
     public void actualizaCliente(Cliente cliente) throws NonexistentEntityException {
         EntityManager em = this.conexion.crearConexion();
-        try
-        {
+        try {
             em.getTransaction().begin();
 
             Cliente clienteExistente = em.find(Cliente.class, cliente.getId());
-            if (clienteExistente == null)
-            {
+            if (clienteExistente == null) {
                 throw new NonexistentEntityException("El cliente con ID " + cliente.getId() + " no existe.");
             }
 
             em.merge(cliente);
             em.getTransaction().commit();
 
-        } catch (Exception e)
-        {
-            if (em.getTransaction().isActive())
-            {
+        } catch (Exception e) {
+            if (em.getTransaction().isActive()) {
                 em.getTransaction().rollback();
             }
             throw new NonexistentEntityException("No se pudo actualizar el cliente: " + e);
-        } finally
-        {
-            em.close();
+        } finally {
+            if (em != null && em.isOpen()) {
+                em.close();
+            }
         }
     }
 
     public void eliminarCliente(Long idCliente) throws NonexistentEntityException {
         EntityManager em = this.conexion.crearConexion();
-        try
-        {
+        try {
             em.getTransaction().begin();
 
             Cliente cliente = em.find(Cliente.class, idCliente);
-            if (cliente == null)
-            {
+            if (cliente == null) {
                 throw new NonexistentEntityException("El cliente con ID " + idCliente + " no existe.");
             }
 
             em.remove(cliente);
             em.getTransaction().commit();
 
-        } catch (Exception e)
-        {
-            if (em.getTransaction().isActive())
-            {
+        } catch (Exception e) {
+            if (em.getTransaction().isActive()) {
                 em.getTransaction().rollback();
             }
             throw new NonexistentEntityException("No se pudo eliminar el cliente: " + e);
-        } finally
-        {
-            em.close();
+        } finally {
+            if (em != null && em.isOpen()) {
+                em.close();
+            }
         }
     }
 
@@ -116,46 +104,45 @@ public class ClienteDAO {
 
     private List<Cliente> obtenerClientes(boolean all, int maxResults, int firstResult) {
         EntityManager em = this.conexion.crearConexion();
-        try
-        {
+        try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
             cq.select(cq.from(Cliente.class));
             Query q = em.createQuery(cq);
-            if (!all)
-            {
+            if (!all) {
                 q.setMaxResults(maxResults);
                 q.setFirstResult(firstResult);
             }
             return q.getResultList();
-        } finally
-        {
-            em.close();
+        } finally {
+            if (em != null && em.isOpen()) {
+                em.close();
+            }
         }
     }
 
     public Cliente obtenerCliente(Long id) {
         EntityManager em = this.conexion.crearConexion();
-        try
-        {
+        try {
             return em.find(Cliente.class, id);
-        } finally
-        {
-            em.close();
+        } finally {
+            if (em != null && em.isOpen()) {
+                em.close();
+            }
         }
     }
 
     public int obtieneTotalClientes() {
         EntityManager em = this.conexion.crearConexion();
-        try
-        {
+        try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
             Root<Cliente> rt = cq.from(Cliente.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();
-        } finally
-        {
-            em.close();
+        } finally {
+            if (em != null && em.isOpen()) {
+                em.close();
+            }
         }
     }
 

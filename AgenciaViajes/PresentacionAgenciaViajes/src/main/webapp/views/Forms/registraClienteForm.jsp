@@ -1,31 +1,6 @@
 <%@page import="java.time.format.DateTimeParseException"%>
 <%@page import="java.time.LocalDate"%>
-<%@page import="objetos_negocio.ControlClientes"%>
-<%@page import="objetos_negocio.Cliente"%>
 <%@page contentType="text/html" pageEncoding="UTF-8" language="java" %>
-<%
-    boolean clienteAgregado = false;
-    boolean fechaInvalida = false;
-
-    String accion = request.getParameter("accion");
-
-    if ("agregar".equals(accion)) {
-        String nombre = request.getParameter("nombre");
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        String telefono = request.getParameter("telefono");
-        String fechaString = request.getParameter("fecha");
-
-        try {
-            LocalDate fechaNacimiento = LocalDate.parse(fechaString);
-            Cliente cliente = new Cliente(nombre, email, password, telefono, fechaNacimiento);
-            ControlClientes.agregar_cliente(cliente);
-            clienteAgregado = true;
-        } catch (DateTimeParseException e) {
-            fechaInvalida = true;
-        }
-    }
-%>
 
 <!DOCTYPE html>
 <html>
@@ -51,12 +26,12 @@
                     <h2 class="menu-title">Registra Usuario</h2>
                     <div id="alertaCampos" class="alerta"></div>
 
-                    <form id="formularioRegistraCliente" action="${pageContext.request.contextPath}/views/Forms/registraClienteForm.jsp" method="POST" onsubmit="mostrarConfirmacion(event)">
+                    <form id="formularioRegistraCliente" action="${pageContext.request.contextPath}/agregarClienteServlet" method="POST" onsubmit="mostrarConfirmacion(event)">
                         <input type="hidden" name="accion" value="agregar">
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="nombre">Nombre:</label>
-                                <input class="form-input" type="text" id="nombre" name="nombre" placeholder="Ingrese su nombre">
+                                <input class="form-input" type="text" id="nombre" name="nombres" placeholder="Ingrese su nombre">
                             </div>
                         </div>
 
@@ -93,7 +68,7 @@
             </div>
         </main>
 
-        <% if (clienteAgregado) { %>
+        <% if ("true".equals(request.getParameter("exito"))) { %>
         <script>
             Swal.fire({
                 icon: 'success',
@@ -106,7 +81,19 @@
                 window.location.href = 'login.jsp';
             });
         </script>
-        <% }%>
+        <% } %>
+
+        <% if ("true".equals(request.getParameter("error"))) { %>
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'No se pudo registrar el cliente. Verifica los datos ingresados.',
+                showConfirmButton: true
+            });
+        </script>
+        <% } %>
+
 
     </body>
 </html>

@@ -5,6 +5,7 @@
 package entidades;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
 
 /**
  *
@@ -30,14 +32,18 @@ public class Cliente implements Serializable {
     @Column(name = "nombres")
     private String nombres;
 
-    @Column(name = "email")
+    @Column(name = "email", unique = true)
     private String email;
 
     @Column(name = "password")
     private String password;
 
-    @Column(name = "telefono")
+    @Column(name = "telefono", unique = true)
     private String telefono;
+
+    @Column(name = "fechaNacimiento")
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+    private Date fechaNacimiento;
 
     @OneToMany(mappedBy = "cliente")
     private List<Reserva> reservas;
@@ -45,20 +51,22 @@ public class Cliente implements Serializable {
     public Cliente() {
     }
 
-    public Cliente(Long id, String nombres, String email, String password, String telefono, List<Reserva> reservas) {
+    public Cliente(Long id, String nombres, String email, String password, String telefono, Date fechaNacimiento, List<Reserva> reservas) {
         this.id = id;
         this.nombres = nombres;
         this.email = email;
         this.password = password;
         this.telefono = telefono;
+        this.fechaNacimiento = fechaNacimiento;
         this.reservas = reservas;
     }
 
-    public Cliente(String nombres, String email, String password, String telefono, List<Reserva> reservas) {
+    public Cliente(String nombres, String email, String password, String telefono, Date fechaNacimiento, List<Reserva> reservas) {
         this.nombres = nombres;
         this.email = email;
         this.password = password;
         this.telefono = telefono;
+        this.fechaNacimiento = fechaNacimiento;
         this.reservas = reservas;
     }
 
@@ -102,6 +110,14 @@ public class Cliente implements Serializable {
         this.telefono = telefono;
     }
 
+    public Date getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    public void setFechaNacimiento(Date fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
+
     public List<Reserva> getReservas() {
         return reservas;
     }
@@ -120,13 +136,11 @@ public class Cliente implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Cliente))
-        {
+        if (!(object instanceof Cliente)) {
             return false;
         }
         Cliente other = (Cliente) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)))
-        {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -141,6 +155,7 @@ public class Cliente implements Serializable {
         sb.append(", email=").append(email);
         sb.append(", password=").append(password);
         sb.append(", telefono=").append(telefono);
+        sb.append(", fechaNacimiento=").append(fechaNacimiento);
         sb.append(", reservas=").append(reservas);
         sb.append('}');
         return sb.toString();
