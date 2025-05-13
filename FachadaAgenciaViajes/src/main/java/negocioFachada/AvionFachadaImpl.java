@@ -10,6 +10,7 @@ import conexion.IConexion;
 import daos.AvionDAO;
 import daos.exceptions.PersistenciaException;
 import entidades.Avion;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -65,4 +66,26 @@ public class AvionFachadaImpl implements AvionFachada {
             Logger.getLogger(AvionFachadaImpl.class.getName()).log(Level.SEVERE, "Error al eliminar avión", e);
         }
     }
+
+    @Override
+    public List<Avion> buscarAviones(String modelo, Integer capacidad) {
+        try {
+            return avionDAO.buscarAviones(modelo, capacidad);
+        } catch (PersistenciaException e) {
+            Logger.getLogger(AvionFachadaImpl.class.getName()).log(Level.SEVERE, "Error al buscar aviones", e);
+            return null;
+        }
+    }
+
+    @Override
+    public boolean guardarAvion(Avion avion) {
+        try {
+            avionDAO.guardarAvion(avion);
+            return true; // Si no hay errores, retorna true
+        } catch (PersistenciaException e) {
+            Logger.getLogger(AvionFachadaImpl.class.getName()).log(Level.SEVERE, "Error al guardar avión", e);
+            return false; // En caso de error, retorna false
+        }
+    }
+
 }

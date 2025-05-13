@@ -16,4 +16,6 @@ public interface AvionFachada {
     void eliminarAvion(Long idAvion);
     Avion obtenerAvionPorId(Long idAvion);
     List<Avion> obtenerTodosLosAviones();
+    List<Avion> buscarAviones(String modelo, Integer capacidad);
+    public boolean guardarAvion(Avion avion);
 }

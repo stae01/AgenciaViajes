@@ -21,4 +21,8 @@ public interface IAvionDAO {
     public List<Avion> obtenerTodosLosAviones() throws PersistenciaException;
 
     public void eliminarAvion(Long idAvion) throws PersistenciaException;
+    
+    public List<Avion> buscarAviones(String modelo, Integer capacidad) throws PersistenciaException;
+    
+    public void guardarAvion(Avion avion) throws PersistenciaException;
 }
