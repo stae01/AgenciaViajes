@@ -12,6 +12,15 @@
         <servlet-name>BuscarAvionesServlet</servlet-name>
         <servlet-class>servletsAviones.BuscarAvionesServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ManejaSesionServlet</servlet-name>
+        <servlet-class>servletManejaSesion.ManejaSesionServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet>
+        <servlet-name>ConsultaClientesServlet</servlet-name>
+        <servlet-class>servletsClientes.ConsultaClientesServlet</servlet-class>
+    </servlet>
     
     
     
@@ -27,6 +36,16 @@
         <servlet-name>BuscarAvionesServlet</servlet-name>
         <url-pattern>/buscarAvionesServlet</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManejaSesionServlet</servlet-name>
+        <url-pattern>/manejaSesionServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ConsultaClientesServlet</servlet-name>
+        <url-pattern>/consultaClientesServlet</url-pattern>
+    </servlet-mapping>
+    
+    
     
     <session-config>
         <session-timeout>

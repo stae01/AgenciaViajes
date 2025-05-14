@@ -48,6 +48,9 @@ public class Cliente implements Serializable {
     @OneToMany(mappedBy = "cliente")
     private List<Reserva> reservas;
 
+    @Column(name = "isAdmin")
+    private boolean isAdmin;
+
     public Cliente() {
     }
 
@@ -68,6 +71,16 @@ public class Cliente implements Serializable {
         this.telefono = telefono;
         this.fechaNacimiento = fechaNacimiento;
         this.reservas = reservas;
+    }
+
+    public Cliente(String nombres, String email, String password, String telefono, Date fechaNacimiento, List<Reserva> reservas, boolean isAdmin) {
+        this.nombres = nombres;
+        this.email = email;
+        this.password = password;
+        this.telefono = telefono;
+        this.fechaNacimiento = fechaNacimiento;
+        this.reservas = reservas;
+        this.isAdmin = isAdmin;
     }
 
     public Long getId() {
@@ -124,6 +137,14 @@ public class Cliente implements Serializable {
 
     public void setReservas(List<Reserva> reservas) {
         this.reservas = reservas;
+    }
+
+    public boolean isIsAdmin() {
+        return isAdmin;
+    }
+
+    public void setIsAdmin(boolean isAdmin) {
+        this.isAdmin = isAdmin;
     }
 
     @Override

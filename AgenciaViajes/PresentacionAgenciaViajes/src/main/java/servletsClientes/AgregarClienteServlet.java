@@ -33,7 +33,7 @@ public class AgregarClienteServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.sendRedirect("/Presentacion/views/inventario/agregarProductoForm.jsp");
+        response.sendRedirect("/views/modulo cliente/registraClienteForm.jsp");
     }
 
     /**
@@ -70,9 +70,9 @@ public class AgregarClienteServlet extends HttpServlet {
             ClienteFachada clienteFachada = new ClienteFachadaImpl();
             clienteFachada.guardarCliente(cliente);
 
-            response.sendRedirect(request.getContextPath() + "/views/forms/registraClienteForm.jsp?exito=true");
+            response.sendRedirect(request.getContextPath() + "/views/modulo cliente/registraClienteForm.jsp?exito=true");
         } catch (Exception e) {
-           response.sendRedirect(request.getContextPath() + "/views/forms/registraClienteForm.jsp?error=true");
+           response.sendRedirect(request.getContextPath() + "/views/modulo cliente/registraClienteForm.jsp?error=true");
         }
     }
 

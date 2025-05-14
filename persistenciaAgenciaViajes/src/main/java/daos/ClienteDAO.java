@@ -9,7 +9,10 @@ import daos.exceptions.NonexistentEntityException;
 import daos.exceptions.PersistenciaException;
 import entidades.Cliente;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -94,6 +97,27 @@ public class ClienteDAO {
         }
     }
 
+    public Cliente autenticar(String email, String password) {
+        EntityManager em = this.conexion.crearConexion();
+        Cliente cliente = null;
+        try {
+            cliente = em.createQuery(
+                    "SELECT c FROM Cliente c WHERE c.email = :email AND c.password = :password", Cliente.class)
+                    .setParameter("email", email)
+                    .setParameter("password", password)
+                    .getSingleResult();
+        } catch (NoResultException e) {
+            cliente = null;
+        } catch (Exception e) {
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, "Error al autenticar cliente", e);
+        } finally {
+            if (em.isOpen()) {
+                em.close();
+            }
+        }
+        return cliente;
+    }
+
     public List<Cliente> obtenerClientes() {
         return obtenerClientes(true, -1, -1);
     }
@@ -117,6 +141,17 @@ public class ClienteDAO {
             if (em != null && em.isOpen()) {
                 em.close();
             }
+        }
+    }
+
+    public Cliente buscarPorEmail(String email) {
+        EntityManager em = conexion.crearConexion();
+        try {
+            return em.createQuery("SELECT c FROM Cliente c WHERE c.email = :email", Cliente.class)
+                    .setParameter("email", email)
+                    .getSingleResult();
+        } catch (NoResultException e) {
+            return null;
         }
     }
 

@@ -14,6 +14,7 @@ import entidades.Cliente;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.persistence.NoResultException;
 
 /**
  *
@@ -54,6 +55,24 @@ public class ClienteFachadaImpl implements ClienteFachada {
         } catch (NonexistentEntityException e) {
             Logger.getLogger(ClienteFachadaImpl.class.getName()).log(Level.SEVERE, "Error al eliminar cliente", e);
         }
+    }
+
+    @Override
+    public Cliente autenticarCliente(String email, String password) {
+        try {
+            return this.clienteDAO.autenticar(email, password);
+        } catch (NoResultException e) {
+            Logger.getLogger(ClienteFachadaImpl.class.getName()).log(Level.WARNING, "Cliente no encontrado con email: " + email);
+            return null;
+        } catch (Exception e) {
+            Logger.getLogger(ClienteFachadaImpl.class.getName()).log(Level.SEVERE, "Error al autenticar cliente", e);
+            return null;
+        }
+    }
+
+    @Override
+    public Cliente buscarPorEmail(String email) {
+        return clienteDAO.buscarPorEmail(email);
     }
 
     @Override

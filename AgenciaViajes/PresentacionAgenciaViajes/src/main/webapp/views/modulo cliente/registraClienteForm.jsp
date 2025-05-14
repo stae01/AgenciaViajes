@@ -61,7 +61,7 @@
 
                         <div class="form-buttons">
                             <button type="submit" class="menu-button btn-guardar">Guardar</button>
-                            <button type="button" class="menu-button btn-cancelar" onclick="window.location.href = 'login.jsp'">Cancelar</button>                        
+                            <button type="button" class="menu-button btn-cancelar" onclick="window.location.href = '${pageContext.request.contextPath}/index.jsp'">Cancelar</button>                        
                         </div>
                     </form>
                 </div>
@@ -78,7 +78,7 @@
                 timer: 3000,
                 timerProgressBar: true
             }).then(() => {
-                window.location.href = 'login.jsp';
+                window.location.href = '${pageContext.request.contextPath}/index.jsp';
             });
         </script>
         <% } %>

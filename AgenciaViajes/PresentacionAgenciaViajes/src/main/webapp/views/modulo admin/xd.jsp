@@ -1,4 +1,10 @@
 <%-- 
+    Document   : consultaClientes
+    Created on : 14 may 2025, 01:54:48
+    Author     : Chris
+--%>
+
+<%-- 
     Document   : admin
     Created on : 5 may 2025, 0:17:53
     Author     : pauli
@@ -73,7 +79,7 @@
                         <button type="button" class="menu-button btn-registro" onclick="window.location.href = 'registraClienteForm.jsp'">
                             Agregar Cliente
                         </button>
-                        <button type="button" class="menu-button btn-volver" onclick="window.location.href = 'login.jsp'">
+                        <button type="button" class="menu-button btn-volver" onclick="window.location.href = '${pageContext.request.contextPath}/views/modulo admin/menuAdmin.jsp'">
                             Volver
                         </button>
                     </div>

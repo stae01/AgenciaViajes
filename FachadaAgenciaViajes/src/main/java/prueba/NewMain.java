@@ -6,6 +6,7 @@ package prueba;
 
 import InterfacesFachada.ClienteFachada;
 import entidades.Cliente;
+import java.util.List;
 import negocioFachada.ClienteFachadaImpl;
 
 /**
@@ -19,12 +20,12 @@ public class NewMain {
      */
     public static void main(String[] args) {
         
-        ClienteFachada clientedao = new ClienteFachadaImpl();
-        
-        
-        Cliente cliente = new Cliente();
-        
-        clientedao.guardarCliente(cliente);
-    }
+        ClienteFachada fachada = new ClienteFachadaImpl();
+        System.out.println("Total clientes: " + fachada.contarClientes());
+        List<Cliente> clientes = fachada.consultarClientes(10, 0);
+        System.out.println("Clientes obtenidos: " + clientes.size());
+        clientes.forEach(c -> System.out.println(c.getNombres()));
     
+}
+
 }

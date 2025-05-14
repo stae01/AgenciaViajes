@@ -15,6 +15,8 @@ public interface ClienteFachada {
     void guardarCliente(Cliente cliente);
     void actualizarCliente(Cliente cliente);
     void eliminarCliente(Long id);
+    Cliente autenticarCliente(String email, String password);
+    Cliente buscarPorEmail(String email);
     Cliente consultarCliente(Long id);
     List<Cliente> consultarClientes();
     List<Cliente> consultarClientes(int maxResults, int firstResult);
