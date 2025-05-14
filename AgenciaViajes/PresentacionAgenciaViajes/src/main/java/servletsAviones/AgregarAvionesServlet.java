@@ -4,14 +4,12 @@
  */
 package servletsAviones;
 
-import servletsVuelos.*;
 import InterfacesFachada.AvionFachada;
 import entidades.Avion;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import negocioFachada.AvionFachadaImpl;
@@ -20,7 +18,6 @@ import negocioFachada.AvionFachadaImpl;
  *
  * @author pauli
  */
-@WebServlet("/agregarAvionesServlet")
 public class AgregarAvionesServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private final AvionFachada avionFachada = new AvionFachadaImpl();
@@ -44,9 +41,9 @@ public class AgregarAvionesServlet extends HttpServlet {
 
         // Redirigir según el resultado
         if (exito) {
-            response.sendRedirect("agregarAvionesForm.jsp?exito=true");
+            response.sendRedirect(request.getContextPath() + "/views/forms/agregarAvionesForm.jsp?exito=true");
         } else {
-            response.sendRedirect("agregarAvionesForm.jsp?error=true");
+            response.sendRedirect("\"/views/forms/agregarAvionesForm.jsp?error=true");
         }
     }
 }

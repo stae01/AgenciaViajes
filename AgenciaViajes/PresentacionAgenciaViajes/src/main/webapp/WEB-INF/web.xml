@@ -4,12 +4,28 @@
         <servlet-name>AgregarClienteServlet</servlet-name>
         <servlet-class>servletsClientes.AgregarClienteServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AgregarAvionesServlet</servlet-name>
+        <servlet-class>servletsAviones.AgregarAvionesServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BuscarAvionesServlet</servlet-name>
+        <servlet-class>servletsAviones.BuscarAvionesServlet</servlet-class>
+    </servlet>
     
     
     
      <servlet-mapping>
         <servlet-name>AgregarClienteServlet</servlet-name>
         <url-pattern>/agregarClienteServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AgregarAvionesServlet</servlet-name>
+        <url-pattern>/agregarAvionesServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BuscarAvionesServlet</servlet-name>
+        <url-pattern>/buscarAvionesServlet</url-pattern>
     </servlet-mapping>
     
     <session-config>
