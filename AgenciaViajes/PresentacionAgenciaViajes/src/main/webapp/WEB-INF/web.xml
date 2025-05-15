@@ -45,6 +45,24 @@
         <url-pattern>/consultaClientesServlet</url-pattern>
     </servlet-mapping>
     
+    <servlet>
+        <servlet-name>BuscarVuelosServlet</servlet-name>
+        <servlet-class>BuscarVuelosServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>BuscarVuelosServlet</servlet-name>
+        <url-pattern>servletsVuelos.BuscarVuelosServlet</url-pattern>
+    </servlet-mapping>
+    
+       <servlet>
+        <servlet-name>AgregarVueloServlet</servlet-name>
+        <servlet-class>AgregarVueloServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AgregarVueloServlet</servlet-name>
+        <url-pattern>servletsVuelos.agregarVueloServlet</url-pattern>
+    </servlet-mapping>
+    
     
     
     <session-config>

@@ -4,6 +4,8 @@
  */
 package servletsVuelos;
 
+import InterfacesFachada.VueloFachada;
+import entidades.Vuelo;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -11,35 +13,70 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
+import negocioFachada.VueloFachadaImpl;
 
 /**
  *
  * @author user
  */
 @WebServlet("/BuscarVuelosServlet")
+
 public class BuscarVuelosServlet extends HttpServlet {
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Recibir parámetros de la búsqueda (origen, destino, fechas, etc.)
+
+    private final VueloFachada vueloFachada;
+
+    public BuscarVuelosServlet() {
+        this.vueloFachada = new VueloFachadaImpl();
+    }
+
+    /**
+     * Maneja la solicitud HTTP <code>GET</code>, realiza la búsqueda de vuelos.
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
         String origen = request.getParameter("origen");
         String destino = request.getParameter("destino");
-        String fechaSalida = request.getParameter("fechaSalida");
-        String fechaRegreso = request.getParameter("fechaRegreso");
-        int numPasajeros = Integer.parseInt(request.getParameter("numPasajeros"));
-        
-        // Lógica para buscar vuelos (esto es solo un ejemplo, podrías hacer una consulta a la base de datos)
-        //List<Vuelo> vuelosDisponibles = buscarVuelos(origen, destino, fechaSalida, fechaRegreso, numPasajeros);
-        
-        // Enviar la lista de vuelos a la página JSP
-        //request.setAttribute("vuelosDisponibles", vuelosDisponibles);
-        
-        // Redirigir a la página de resultados de la búsqueda
-        RequestDispatcher dispatcher = request.getRequestDispatcher("resultadosBusqueda.jsp");
-        dispatcher.forward(request, response);
+        String fechaStr = request.getParameter("fecha");
+        Date fecha = null;
+
+        try {
+            if (fechaStr != null && !fechaStr.isBlank()) {
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                fecha = sdf.parse(fechaStr);
+            }
+
+            List<Vuelo> vuelos = vueloFachada.obtenerVuelosPorOrigenDestino(origen, destino);
+
+            if (fecha != null) {
+                LocalDate fechaBusqueda = fecha.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                vuelos.removeIf(vuelo -> !compareDates(vuelo.getFechaSalida(), fechaBusqueda));
+            }
+
+            request.setAttribute("vuelos", vuelos);
+
+            // Redirigir a la página de resultados
+            request.getRequestDispatcher("/views/vuelo/resultadosVuelos.jsp").forward(request, response);
+
+           
+        } catch (Exception e) {
+            // En caso de error, redirigir al formulario de búsqueda con un mensaje de error
+            request.setAttribute("error", "No se pudieron obtener los vuelos.");
+            request.getRequestDispatcher("/views/forms/buscarVuelosForm.jsp").forward(request, response);
+        }
     }
-    
-//    private List<Vuelo> buscarVuelos(String origen, String destino, String fechaSalida, String fechaRegreso, int numPasajeros) {
-//        // Lógica de búsqueda, normalmente consultando la base de datos
-//        return VueloDAO.buscarVuelos(origen, destino, fechaSalida, fechaRegreso, numPasajeros);
-//    }
+
+    /**
+     * Método para comparar las fechas solo por día, mes y año, sin considerar la hora.
+     */
+    private boolean compareDates(Date fechaVuelo, LocalDate fechaBusqueda) {
+        LocalDate vueloLocalDate = fechaVuelo.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        return vueloLocalDate.equals(fechaBusqueda);
+    }
 }
