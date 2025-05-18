@@ -15,7 +15,10 @@ public interface AvionFachada {
     void crearAvion(Avion avion);
     void eliminarAvion(Long idAvion);
     Avion obtenerAvionPorId(Long idAvion);
-    List<Avion> obtenerTodosLosAviones();
     List<Avion> buscarAviones(String modelo, Integer capacidad);
     public boolean guardarAvion(Avion avion);
+    void actualizarAvion(Avion avion);
+    int contarAviones();
+    List<Avion> consultarAviones();
+    List<Avion> consultarAviones(int maxResults, int firstResult);
 }

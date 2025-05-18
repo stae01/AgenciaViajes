@@ -8,6 +8,7 @@ import InterfacesFachada.AvionFachada;
 import conexion.Conexion;
 import conexion.IConexion;
 import daos.AvionDAO;
+import daos.exceptions.NonexistentEntityException;
 import daos.exceptions.PersistenciaException;
 import entidades.Avion;
 import java.util.ArrayList;
@@ -39,6 +40,15 @@ public class AvionFachadaImpl implements AvionFachada {
     }
 
     @Override
+    public void actualizarAvion(Avion avion) {
+        try {
+            this.avionDAO.actualizaAvion(avion);
+        } catch (NonexistentEntityException e) {
+            Logger.getLogger(ClienteFachadaImpl.class.getName()).log(Level.SEVERE, "Error al actualizar cliente", e);
+        }
+    }
+
+    @Override
     public Avion obtenerAvionPorId(Long idAvion) {
         try {
             return avionDAO.obtenerAvionPorId(idAvion);
@@ -49,13 +59,13 @@ public class AvionFachadaImpl implements AvionFachada {
     }
 
     @Override
-    public List<Avion> obtenerTodosLosAviones() {
-        try {
-            return avionDAO.obtenerTodosLosAviones();
-        } catch (PersistenciaException e) {
-            Logger.getLogger(AvionFachadaImpl.class.getName()).log(Level.SEVERE, "Error al obtener todos los aviones", e);
-            return null;
-        }
+    public List<Avion> consultarAviones() {
+        return this.avionDAO.obtenerAviones();
+    }
+
+    @Override
+    public List<Avion> consultarAviones(int maxResults, int firstResult) {
+        return this.avionDAO.obtenerAviones(maxResults, firstResult);
     }
 
     @Override
@@ -86,6 +96,11 @@ public class AvionFachadaImpl implements AvionFachada {
             Logger.getLogger(AvionFachadaImpl.class.getName()).log(Level.SEVERE, "Error al guardar avión", e);
             return false; // En caso de error, retorna false
         }
+    }
+    
+    @Override
+    public int contarAviones() {
+        return this.avionDAO.obtieneTotalAviones();
     }
 
 }

@@ -18,7 +18,7 @@
     </head>
     <body>
         <header class="header">
-             <img src="${pageContext.request.contextPath}/images/logo.png" alt="Logo Good Riddance" class="logo">
+            <img src="${pageContext.request.contextPath}/images/logo.png" alt="Logo Good Riddance" class="logo">
         </header>
 
         <main class="main-content">
@@ -55,7 +55,7 @@
 
                         <div class="form-buttons">
                             <button type="submit" class="menu-button btn-guardar">Guardar</button>
-                            <button type="button" class="menu-button btn-cancelar" onclick="window.location.href = 'index.jsp'">Cancelar</button>                        
+                            <button type="button" class="menu-button btn-cancelar" onclick="window.location.href = '${pageContext.request.contextPath}/consultarAvionesServlet'">Cancelar</button>                        
                         </div>
                     </form>
                 </div>
@@ -72,7 +72,7 @@
                 timer: 3000,
                 timerProgressBar: true
             }).then(() => {
-                window.location.href = 'index.jsp';
+                window.location.href = '${pageContext.request.contextPath}/consultarAvionesServlet';
             });
         </script>
         <% } %>
@@ -87,5 +87,17 @@
             });
         </script>
         <% } %>
+
+        <% if ("true".equals(request.getParameter("noDisponibles"))) { %>
+        <script>
+            Swal.fire({
+                icon: 'warning',
+                title: '¡Atención!',
+                text: 'No hay aviones disponibles para asignar al vuelo. Por favor registra uno nuevo.',
+                showConfirmButton: true
+            });
+        </script>
+        <% }%>
+
     </body>
 </html>

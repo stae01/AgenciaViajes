@@ -36,24 +36,29 @@ public class Avion implements Serializable {
     @Column(name = "capacidad")
     private int capacidad;
 
+    @Column(name = "esOcupado")
+    private boolean busy;
+
     @OneToMany(mappedBy = "avion")
     private List<Vuelo> vuelos;
 
     public Avion() {
     }
 
-    public Avion(Long id, String modelo, String matricula, int capacidad, List<Vuelo> vuelos) {
+    public Avion(Long id, String modelo, String matricula, int capacidad, boolean busy, List<Vuelo> vuelos) {
         this.id = id;
         this.modelo = modelo;
         this.matricula = matricula;
         this.capacidad = capacidad;
+        this.busy = busy;
         this.vuelos = vuelos;
     }
 
-    public Avion(String modelo, String matricula, int capacidad, List<Vuelo> vuelos) {
+    public Avion(String modelo, String matricula, int capacidad, boolean busy, List<Vuelo> vuelos) {
         this.modelo = modelo;
         this.matricula = matricula;
         this.capacidad = capacidad;
+        this.busy = busy;
         this.vuelos = vuelos;
     }
 
@@ -89,6 +94,14 @@ public class Avion implements Serializable {
         this.capacidad = capacidad;
     }
 
+    public boolean isBusy() {
+        return busy;
+    }
+
+    public void setIsBusy(boolean busy) {
+        this.busy = busy;
+    }
+
     public List<Vuelo> getVuelos() {
         return vuelos;
     }
@@ -107,13 +120,11 @@ public class Avion implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Avion))
-        {
+        if (!(object instanceof Avion)) {
             return false;
         }
         Avion other = (Avion) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)))
-        {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;

@@ -23,8 +23,14 @@ public interface IVueloDAO {
 
     public List<Vuelo> obtenerVuelosPorFecha(Date fecha) throws PersistenciaException;
 
-    public List<Vuelo> obtenerTodosLosVuelos() throws PersistenciaException;
-
     public void eliminarVuelo(Long idVuelo) throws PersistenciaException;
+    
+    List<Vuelo> obtenerVuelos();
+    
+    List<Vuelo> obtenerVuelos(int maxResults, int firstResult);
+    
+    List<Vuelo> obtenerVuelos(boolean all, int maxResults, int firstResult);
+    
+    int obtieneTotalVuelos();
 
 }

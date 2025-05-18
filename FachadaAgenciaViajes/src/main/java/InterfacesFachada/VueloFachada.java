@@ -19,4 +19,6 @@ public interface VueloFachada {
     List<Vuelo> obtenerVuelosPorFecha(Date fecha);
     List<Vuelo> obtenerTodosLosVuelos();
     void eliminarVuelo(Long idVuelo);
+    int contarVuelos();
+    List<Vuelo> consultarVuelos(int maxResults, int firstResult);
 }

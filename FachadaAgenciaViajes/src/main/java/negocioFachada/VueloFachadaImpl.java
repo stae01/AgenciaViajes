@@ -70,12 +70,18 @@ public class VueloFachadaImpl implements VueloFachada {
 
     @Override
     public List<Vuelo> obtenerTodosLosVuelos() {
-        try {
-            return vueloDAO.obtenerTodosLosVuelos();
-        } catch (PersistenciaException e) {
-            Logger.getLogger(VueloFachadaImpl.class.getName()).log(Level.SEVERE, "Error al obtener todos los vuelos", e);
-            return null;
-        }
+        return this.vueloDAO.obtenerVuelos();
+
+    }
+
+    @Override
+    public int contarVuelos() {
+        return this.vueloDAO.obtieneTotalVuelos();
+    }
+
+    @Override
+    public List<Vuelo> consultarVuelos(int maxResults, int firstResult) {
+        return this.vueloDAO.obtenerVuelos(maxResults, firstResult);
     }
 
     @Override

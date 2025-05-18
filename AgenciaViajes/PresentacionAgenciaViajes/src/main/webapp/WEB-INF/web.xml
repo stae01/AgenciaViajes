@@ -21,10 +21,26 @@
         <servlet-name>ConsultaClientesServlet</servlet-name>
         <servlet-class>servletsClientes.ConsultaClientesServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ConsultarVuelosServlet</servlet-name>
+        <servlet-class>servletsVuelos.ConsultarVuelosServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BuscarVuelosServlet</servlet-name>
+        <servlet-class>servletsVuelos.BuscarVuelosServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AgregarVuelosServlet</servlet-name>
+        <servlet-class>servletsVuelos.AgregarVuelosServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ConsultarAvionesServlet</servlet-name>
+        <servlet-class>servletsAviones.ConsultarAvionesServlet</servlet-class>
+    </servlet>
     
     
     
-     <servlet-mapping>
+    <servlet-mapping>
         <servlet-name>AgregarClienteServlet</servlet-name>
         <url-pattern>/agregarClienteServlet</url-pattern>
     </servlet-mapping>
@@ -44,23 +60,21 @@
         <servlet-name>ConsultaClientesServlet</servlet-name>
         <url-pattern>/consultaClientesServlet</url-pattern>
     </servlet-mapping>
-    
-    <servlet>
-        <servlet-name>BuscarVuelosServlet</servlet-name>
-        <servlet-class>BuscarVuelosServlet</servlet-class>
-    </servlet>
     <servlet-mapping>
         <servlet-name>BuscarVuelosServlet</servlet-name>
-        <url-pattern>servletsVuelos.BuscarVuelosServlet</url-pattern>
+        <url-pattern>/buscarVuelosServlet</url-pattern>
+    </servlet-mapping>  
+    <servlet-mapping>
+        <servlet-name>AgregarVuelosServlet</servlet-name>
+        <url-pattern>/agregarVuelosServlet</url-pattern>
     </servlet-mapping>
-    
-       <servlet>
-        <servlet-name>AgregarVueloServlet</servlet-name>
-        <servlet-class>AgregarVueloServlet</servlet-class>
-    </servlet>
     <servlet-mapping>
-        <servlet-name>AgregarVueloServlet</servlet-name>
-        <url-pattern>servletsVuelos.agregarVueloServlet</url-pattern>
+        <servlet-name>ConsultarVuelosServlet</servlet-name>
+        <url-pattern>/consultarVuelosServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ConsultarAvionesServlet</servlet-name>
+        <url-pattern>/consultarAvionesServlet</url-pattern>
     </servlet-mapping>
     
     

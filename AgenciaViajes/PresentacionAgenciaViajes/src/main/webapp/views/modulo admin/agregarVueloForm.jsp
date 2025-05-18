@@ -3,6 +3,8 @@
     Created on : 15 may 2025, 2:49:33 p.m.
     Author     : user
 --%>
+<%@page import="entidades.Avion"%>
+<%@page import="java.util.List"%>
 <%@page import="java.time.format.DateTimeParseException"%>
 <%@page contentType="text/html" pageEncoding="UTF-8" language="java" %>
 
@@ -23,14 +25,14 @@
         <main class="main-content">
             <div class="content-container">
                 <div class="image-panel">
-                    <img src="${pageContext.request.contextPath}/images/imagenFormularioVuelo.jpeg" alt="Imagen de vuelo" class="travel-image">
+                    <img src="${pageContext.request.contextPath}/images/imagenFormularioAvion.jpeg" alt="Imagen de vuelo" class="travel-image">
                 </div>
 
                 <div class="form-panel">
                     <h2 class="menu-title">Registrar Vuelo</h2>
                     <div id="alertaCampos" class="alerta"></div>
 
-                    <form id="formularioRegistraVuelo" action="${pageContext.request.contextPath}/agregarVueloServlet" method="POST" onsubmit="mostrarConfirmacion(event)">
+                    <form id="formularioRegistraVuelo" action="${pageContext.request.contextPath}/agregarVuelosServlet" method="POST" onsubmit="mostrarConfirmacion(event)">
                         <input type="hidden" name="accion" value="agregar">
 
                         <div class="form-row">
@@ -48,30 +50,41 @@
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="fechaSalida">Fecha de Salida:</label>
-                                <input class="form-input" type="date" id="fechaSalida" name="fechaSalida">
+                                <input class="form-input" type="datetime-local" id="fechaSalida" name="fechaSalida">
                             </div>
 
                             <div class="form-group">
-                                <label for="horaSalida">Hora de Salida:</label>
-                                <input class="form-input" type="time" id="horaSalida" name="horaSalida">
+                                <label for="horaSalida">Fecha de Llegada:</label>
+                                <input class="form-input" type="datetime-local" id="fechaLlegada" name="fechaLlegada">
                             </div>
                         </div>
 
                         <div class="form-row">
                             <div class="form-group">
-                                <label for="duracion">Duración:</label>
-                                <input class="form-input" type="text" id="duracion" name="duracion" placeholder="Duración del vuelo">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="avionId">ID del Avión:</label>
-                                <input class="form-input" type="text" id="avionId" name="avionId" placeholder="ID del avión asignado">
+                                <label for="avion">Avión:</label>
+                                <select class="form-input" name="idAvion" required>
+                                    <option value="" disabled selected>Selecciona un avión</option>
+                                    <%
+                                        List<Avion> aviones = (List<Avion>) request.getAttribute("aviones");
+                                        if (aviones != null) {
+                                            for (Avion avion : aviones) {
+                                                if (!avion.isBusy()) { // Solo mostrar si NO está ocupado
+                                    %>
+                                    <option value="<%= avion.getId()%>">
+                                        <%= avion.getModelo()%> - <%= avion.getMatricula()%>
+                                    </option>
+                                    <%
+                                                }
+                                            }
+                                        }
+                                    %>
+                                </select>
                             </div>
                         </div>
 
                         <div class="form-buttons">
                             <button type="submit" class="menu-button btn-guardar">Guardar</button>
-                            <button type="button" class="menu-button btn-cancelar" onclick="window.location.href = 'index.jsp'">Cancelar</button>                        
+                            <button type="button" class="menu-button btn-cancelar" onclick="window.location.href = '${pageContext.request.contextPath}/consultarVuelosServlet'">Cancelar</button>                        
                         </div>
                     </form>
                 </div>
@@ -88,7 +101,7 @@
                 timer: 3000,
                 timerProgressBar: true
             }).then(() => {
-                window.location.href = 'index.jsp';
+                window.location.href = '${pageContext.request.contextPath}/consultarVuelosServlet';
             });
         </script>
         <% } %>
@@ -102,6 +115,6 @@
                 showConfirmButton: true
             });
         </script>
-        <% } %>
+        <% }%>
     </body>
 </html>

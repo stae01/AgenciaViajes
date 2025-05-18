@@ -12,7 +12,7 @@
     <head>
         <meta charset="UTF-8">
         <title>Panel de Administración</title>
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/menuAdmin.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/menuAdmin.css?v=<%= System.currentTimeMillis()%>">
     </head>
     <body>
         <header class="header">
@@ -27,17 +27,21 @@
             <div class="menu-container">
                 <h2 class="menu-title">Menú Principal - Admin</h2>
                 <div class="menu-grid">
-                    <button class="menu-button" onclick="window.location.href = '${pageContext.request.contextPath}/views/inventario/consultaVuelos.jsp'">
-                        <span class="button-icon">📦</span>
+                    <button class="menu-button" onclick="window.location.href = '${pageContext.request.contextPath}/consultarVuelosServlet'">
+                        <span class="button-icon">✈</span>
                         Administrar vuelos
                     </button>
-                    <button class="menu-button" onclick="window.location.href = '${pageContext.request.contextPath}/views/modulo admin/consultaAviones.jsp'">
+                    <button class="menu-button" onclick="window.location.href = '${pageContext.request.contextPath}/consultarAvionesServlet'">
                         <span class="button-icon">📉</span>
                         Administrar Aviones
                     </button>
                     <button class="menu-button" onclick="window.location.href = '${pageContext.request.contextPath}/consultaClientesServlet'">
                         <span class="button-icon">🔧</span>
                         Administrar Clientes
+                    </button>
+                    <button class="menu-button" onclick="window.location.href = '${pageContext.request.contextPath}/views/modulo admin/consultaReservas.jsp'">
+                        <span class="button-icon">📉</span>
+                        Administrar Reservas
                     </button>
                 </div>
             </div>

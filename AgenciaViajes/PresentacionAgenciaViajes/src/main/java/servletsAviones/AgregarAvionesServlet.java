@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
+import javax.servlet.RequestDispatcher;
 import negocioFachada.AvionFachadaImpl;
 
 /**
@@ -19,8 +20,23 @@ import negocioFachada.AvionFachadaImpl;
  * @author pauli
  */
 public class AgregarAvionesServlet extends HttpServlet {
-    private static final long serialVersionUID = 1L;
+    
     private final AvionFachada avionFachada = new AvionFachadaImpl();
+    
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+          RequestDispatcher dispatcher = request.getRequestDispatcher("/views/modulo admin/agregarAvionesForm.jsp");
+          dispatcher.forward(request, response);
+    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -29,7 +45,7 @@ public class AgregarAvionesServlet extends HttpServlet {
         int capacidad = Integer.parseInt(request.getParameter("capacidad"));
 
         // Creación de un nuevo objeto avión
-        Avion avion = new Avion(modelo, matricula, capacidad, new ArrayList<>());
+        Avion avion = new Avion(modelo, matricula, capacidad, false, new ArrayList<>());
 
         boolean exito = false;
         try {
@@ -41,9 +57,14 @@ public class AgregarAvionesServlet extends HttpServlet {
 
         // Redirigir según el resultado
         if (exito) {
-            response.sendRedirect(request.getContextPath() + "/views/forms/agregarAvionesForm.jsp?exito=true");
+            response.sendRedirect(request.getContextPath() + "/views/modulo admin/agregarAvionesForm.jsp?exito=true");
         } else {
-            response.sendRedirect("\"/views/forms/agregarAvionesForm.jsp?error=true");
+            response.sendRedirect("/views/modulo admin/agregarAvionesForm.jsp?error=true");
         }
+    }
+    
+    @Override
+    public String getServletInfo() {
+        return "Servlet para agregar nuevos aviones";
     }
 }
