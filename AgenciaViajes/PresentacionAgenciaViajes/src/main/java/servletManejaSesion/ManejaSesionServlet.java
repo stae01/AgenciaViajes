@@ -26,9 +26,11 @@ public class ManejaSesionServlet extends HttpServlet {
 
         ClienteFachada clienteFachada = new ClienteFachadaImpl();
         // Crear admin solo si no existe
-        try {
+        try
+        {
             Cliente admin = clienteFachada.buscarPorEmail("admin");
-            if (admin == null) {
+            if (admin == null)
+            {
                 Cliente nuevoAdmin = new Cliente();
                 nuevoAdmin.setNombres("Administrador");
                 nuevoAdmin.setEmail("admin");
@@ -36,7 +38,8 @@ public class ManejaSesionServlet extends HttpServlet {
                 nuevoAdmin.setIsAdmin(true);
                 clienteFachada.guardarCliente(nuevoAdmin);
             }
-        } catch (Exception e) {
+        } catch (Exception e)
+        {
             log("Error al crear el usuario administrador: ", e);
         }
     }
@@ -54,15 +57,16 @@ public class ManejaSesionServlet extends HttpServlet {
             throws ServletException, IOException {
         String accion = request.getParameter("accion");
 
-        if ("logout".equals(accion)) {
+        if ("logout".equals(accion))
+        {
             HttpSession session = request.getSession(false);
-            if (session == null || session.getAttribute("cliente") == null) {
-                response.sendRedirect("index.jsp");
+            if (session != null)
+            {
+                session.invalidate(); // Cierra la sesión
             }
-            // Redirigir a login.jsp con un parámetro indicando sesión cerrada
             response.sendRedirect("index.jsp?logout=true");
+            return; // DETIENE la ejecución, evita otro sendRedirect
         }
-
     }
 
     /**
@@ -80,23 +84,28 @@ public class ManejaSesionServlet extends HttpServlet {
 
         ClienteFachada clienteFachada = new ClienteFachadaImpl();
 
-        if ("login".equals(accion)) {
+        if ("login".equals(accion))
+        {
             String email = request.getParameter("email");
             String password = request.getParameter("password");
 
             Cliente clienteAutenticado = clienteFachada.autenticarCliente(email, password);
 
-            if (clienteAutenticado != null) {
+            if (clienteAutenticado != null)
+            {
                 HttpSession session = request.getSession();
                 session.setAttribute("cliente", clienteAutenticado);
 
-                if (Boolean.TRUE.equals(clienteAutenticado.isIsAdmin())) {
+                if (Boolean.TRUE.equals(clienteAutenticado.isIsAdmin()))
+                {
                     response.sendRedirect(request.getContextPath() + "/views/modulo admin/menuAdmin.jsp?exito=true");
-                } else {
-                    response.sendRedirect(request.getContextPath() + "/views/modulo cliente/menuPrincipal.jsp?exito=true");
+                } else
+                {
+                    response.sendRedirect(request.getContextPath() + "/views/modulo cliente/consultaVuelosCliente.jsp?exito=true");
                 }
 
-            } else {
+            } else
+            {
                 request.setAttribute("errorLogin", "Correo o contraseña incorrectos");
                 request.getRequestDispatcher("index.jsp").forward(request, response);
             }

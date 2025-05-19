@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package servletsVuelos;
 
 import InterfacesFachada.VueloFachada;
@@ -16,21 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import negocioFachada.VueloFachadaImpl;
 
-/**
- *
- * @author Chris
- */
-public class ConsultarVuelosServlet extends HttpServlet {
+public class ConsultarVuelosClienteServlet extends HttpServlet {
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -58,14 +41,14 @@ public class ConsultarVuelosServlet extends HttpServlet {
             // Obtener total de productos y calcular total de páginas
             int totalVuelos = vueloFachada.contarVuelos();
 
-// Evitar que totalPaginas sea 0
+            // Evitar que totalPaginas sea 0
             int totalPaginas = (int) Math.ceil((double) totalVuelos / pageSize);
             if (totalPaginas < 1)
             {
                 totalPaginas = 1;
             }
 
-// Validar que la página esté dentro del rango
+            // Validar que la página esté dentro del rango
             if (paginaActual < 1)
             {
                 paginaActual = 1;
@@ -75,46 +58,45 @@ public class ConsultarVuelosServlet extends HttpServlet {
                 paginaActual = totalPaginas;
             }
 
-// Obtener vuelos solo si hay alguno
+            // Obtener vuelos solo si hay alguno
             int primerResultado = (paginaActual - 1) * pageSize;
             List<Vuelo> vuelos = totalVuelos > 0
                     ? vueloFachada.consultarVuelos(pageSize, primerResultado)
                     : new ArrayList<>();
 
-// Enviar los datos a la vista
+            // Debug logging
+            System.out.println("Vuelos obtenidos: " + vuelos.size());
+            for (Vuelo v : vuelos)
+            {
+                System.out.println("Vuelo: " + v.getId() + " - " + v.getOrigen() + " a " + v.getDestino());
+            }
+
+            // Enviar los datos a la vista
             request.setAttribute("vuelos", vuelos);
             request.setAttribute("paginaActual", paginaActual);
             request.setAttribute("totalPaginas", totalPaginas);
 
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/views/modulo admin/consultaVuelos.jsp");
+            // Forward to JSP
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/views/modulo cliente/consultaVuelosCliente.jsp");
             dispatcher.forward(request, response);
         } catch (Exception e)
         {
-            response.sendRedirect("/views/modulo admin/consultaVuelos.jsp");
+            e.printStackTrace();
+            request.setAttribute("error", "Error al cargar vuelos: " + e.getMessage());
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/views/modulo cliente/consultaVuelosCliente.jsp");
+            dispatcher.forward(request, response);
         }
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        // Simplemente redirige al método doGet
+        doGet(request, response);
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
     @Override
     public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
+        return "Servlet para consultar vuelos para clientes";
+    }
 }

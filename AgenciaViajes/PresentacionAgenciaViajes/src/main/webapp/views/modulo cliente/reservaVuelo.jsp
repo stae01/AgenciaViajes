@@ -1,7 +1,7 @@
 <%-- 
-    Document   : index
-    Created on : 5 may 2025, 0:29:03
-    Author     : pauli
+    Document   : reservaVuelo
+    Created on : May 19, 2025, 12:11:45 AM
+    Author     : rramirez
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -12,6 +12,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello Usuario!</h1>
+        <h1>Hello World!</h1>
     </body>
 </html>
