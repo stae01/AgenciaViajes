@@ -37,7 +37,10 @@
         <servlet-name>ConsultarAvionesServlet</servlet-name>
         <servlet-class>servletsAviones.ConsultarAvionesServlet</servlet-class>
     </servlet>
-    
+    <servlet>
+        <servlet-name>ConsultarVuelosClienteServlet</servlet-name>
+        <servlet-class>servletsVuelos.ConsultarVuelosClienteServlet</servlet-class>
+    </servlet>
     
     
     <servlet-mapping>
@@ -76,7 +79,10 @@
         <servlet-name>ConsultarAvionesServlet</servlet-name>
         <url-pattern>/consultarAvionesServlet</url-pattern>
     </servlet-mapping>
-    
+    <servlet-mapping>
+        <servlet-name>ConsultarVuelosClienteServlet</servlet-name>
+        <url-pattern>/consultarVuelosClienteServlet</url-pattern>
+    </servlet-mapping>
     
     
     <session-config>
