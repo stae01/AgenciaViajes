@@ -58,6 +58,7 @@ body {
 .logo:hover {
     transform: scale(1.05);
 }
+
 .content-container {
     display: flex;
     flex: 1;
@@ -338,7 +339,6 @@ label {
     transform: translateY(-2px);
 }
 
-/* Adaptación de fecha */
 input[type="date"] {
     appearance: none;
     -webkit-appearance: none;
@@ -363,7 +363,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     z-index: 2;
 }
 
-/* Responsive */
 @media (max-width: 992px) {
     .content-container {
         flex-direction: column;
@@ -451,7 +450,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     background-color: #f5f5f5;
 }
 
-/* Contenedor principal */
 .content-container {
     max-width: 1200px;
     margin: 0 auto;
@@ -465,7 +463,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     padding: 6px 12px;
     border-radius: 6px;
     font-weight: 500;
-    font-size:  0.85rem;
+    font-size: 0.85rem;
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 3px 6px rgba(0,0,0,0.1);
@@ -534,4 +532,50 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .modal-buttons .btn-volver:hover {
     background-color: #d32f2f;
     transform: translateY(-2px);
+}
+
+.search-button {
+    background-color: var(--color-primary);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 10px rgba(0,119,182,0.3);
+}
+
+.search-button:hover {
+    background-color: #005d91;
+    transform: translateY(-2px);
+}
+
+/* Estilos para el resumen de la reserva (agregados para reservaVuelo.jsp y confirmacionReserva.jsp) */
+.summary-item {
+    display: flex;
+    align-items: center;
+    padding: 15px 18px;
+    border: 2px solid #dde6ed;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    margin-bottom: 15px;
+}
+
+.summary-label {
+    font-weight: 600;
+    color: var(--color-dark);
+    width: 150px;
+    letter-spacing: 0.5px;
+}
+
+.summary-value {
+    color: var(--color-dark);
+    font-weight: 400;
+    flex: 1;
 }
