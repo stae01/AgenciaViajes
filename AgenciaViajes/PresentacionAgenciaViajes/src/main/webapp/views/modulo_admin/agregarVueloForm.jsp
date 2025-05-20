@@ -46,7 +46,7 @@
                                 <input class="form-input" type="text" id="destino" name="destino" placeholder="Ingrese el destino del vuelo">
                             </div>
                         </div>
-                        
+
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="fechaSalida">Fecha de Salida:</label>
@@ -69,7 +69,7 @@
                                         if (aviones != null) {
                                             for (Avion avion : aviones) {
                                                 if (!avion.isBusy()) { // Solo mostrar si NO está ocupado
-%>
+                                    %>
                                     <option value="<%= avion.getId()%>">
                                         <%= avion.getModelo()%> - <%= avion.getMatricula()%>
                                     </option>
@@ -94,14 +94,14 @@
         <% if ("true".equals(request.getParameter("exito"))) { %>
         <script>
             Swal.fire({
-                icon: 'success',
-                title: '¡Vuelo registrado!',
-                text: 'El vuelo se ha registrado correctamente.',
-                showConfirmButton: false,
-                timer: 3000,
-                timerProgressBar: true
+            icon: 'success',
+                    title: '¡Vuelo registrado!',
+                    text: 'El vuelo se ha registrado correctamente.',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true
             }).then(() => {
-                window.location.href = '${pageContext.request.contextPath}/consultarVuelosServlet';
+            window.location.href = '${pageContext.request.contextPath}/consultarVuelosServlet';
             });
         </script>
         <% } %>
@@ -109,51 +109,52 @@
         <% if ("true".equals(request.getParameter("error"))) { %>
         <script>
             Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: 'No se pudo registrar el vuelo. Verifica los datos ingresados.',
-                showConfirmButton: true
+            icon: 'error',
+                    title: 'Error',
+                    text: 'No se pudo registrar el vuelo. Verifica los datos ingresados.',
+                    showConfirmButton: true
             });
         </script>
         <% }%>
         <script>
             const inputDestino = document.getElementById('destino');
             const contenedorImagen = document.getElementById('imagenDestinoContainer');
-
-            const PIXABAY_API_KEY = '50393076-cf2df96a4e23436ea5716b20f'; // Cambia aquí por tu API Key
+            const PIXABAY_API_KEY = '50393076-cf2df96a4e23436ea5716b20f'; 
 
             async function buscarImagenDestino(destino) {
-                if (!destino || destino.trim().length < 3) {
-                    contenedorImagen.innerHTML = '';
-                    return;
-                }
-
-                const url = `https://pixabay.com/api/?key=${PIXABAY_API_KEY}&q=${encodeURIComponent(destino)}&image_type=photo&per_page=1&safesearch=true`;
-
-                try {
-                    const response = await fetch(url);
-                    const data = await response.json();
-
-                    if (data.hits && data.hits.length > 0) {
-                        const imgUrl = data.hits[0].webformatURL;
-                        contenedorImagen.innerHTML = `<img src="${imgUrl}" alt="Imagen de ${destino}" style="max-width: 100%; height: auto; border-radius: 8px;">`;
-                    } else {
-                        contenedorImagen.innerHTML = `<p>No se encontró imagen para "${destino}".</p>`;
-                    }
-                } catch (error) {
-                    console.error('Error al buscar imagen:', error);
-                    contenedorImagen.innerHTML = `<p>Error al buscar imagen.</p>`;
-                }
+            if (!destino || destino.trim().length < 3) {
+            contenedorImagen.innerHTML = '';
+            return;
             }
 
-            // Escuchar cuando el usuario deje de escribir por 700 ms para evitar muchas peticiones
+            // 👇 Aquí usamos concatenación tradicional para evitar problemas con JSP
+            const url = "https://pixabay.com/api/?key=" + PIXABAY_API_KEY +
+                    "&q=" + encodeURIComponent(destino) +
+                    "&image_type=photo&per_page=1&safesearch=true";
+            try {
+            const response = await fetch(url);
+            const data = await response.json();
+            if (data.hits && data.hits.length > 0) {
+            const imgUrl = data.hits[0].webformatURL;
+            contenedorImagen.innerHTML = `<img src="${imgUrl}" alt="Imagen de ${destino}" style="max-width: 100%; height: auto; border-radius: 8px;">`;
+            } else {
+            contenedorImagen.innerHTML = `<p>No se encontró imagen para "${destino}".</p>`;
+            }
+            } catch (error) {
+            console.error('Error al buscar imagen:', error);
+            contenedorImagen.innerHTML = `<p>Error al buscar imagen.</p>`;
+            }
+            }
+
+            // ⏱ Evita hacer muchas peticiones seguidas
             let timeoutId;
             inputDestino.addEventListener('input', () => {
-                clearTimeout(timeoutId);
-                timeoutId = setTimeout(() => {
-                    buscarImagenDestino(inputDestino.value);
-                }, 700);
+            clearTimeout(timeoutId);
+            timeoutId = setTimeout(() => {
+            buscarImagenDestino(inputDestino.value);
+            }, 700);
             });
         </script>
+
     </body>
 </html>
