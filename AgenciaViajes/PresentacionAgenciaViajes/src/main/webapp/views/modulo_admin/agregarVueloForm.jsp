@@ -127,7 +127,6 @@
             return;
             }
 
-            // 👇 Aquí usamos concatenación tradicional para evitar problemas con JSP
             const url = "https://pixabay.com/api/?key=" + PIXABAY_API_KEY +
                     "&q=" + encodeURIComponent(destino) +
                     "&image_type=photo&per_page=1&safesearch=true";
