@@ -54,13 +54,13 @@ public class AgregarVuelosServlet extends HttpServlet {
 
         if (!hayDisponibles) {
             // No hay aviones disponibles, redirigir con mensaje
-            response.sendRedirect(request.getContextPath() + "/views/modulo admin/agregarAvionesForm.jsp?noDisponibles=true");
+            response.sendRedirect(request.getContextPath() + "/views/modulo_admin/agregarAvionesForm.jsp?noDisponibles=true");
             return;
         }
 
         // Si hay aviones disponibles, continuar con la carga del formulario
         request.setAttribute("aviones", avionesDisponibles);
-        request.getRequestDispatcher("/views/modulo admin/agregarVueloForm.jsp").forward(request, response);
+        request.getRequestDispatcher("/views/modulo_admin/agregarVueloForm.jsp").forward(request, response);
     }
 
     /**

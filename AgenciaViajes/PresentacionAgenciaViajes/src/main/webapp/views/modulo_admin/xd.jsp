@@ -79,7 +79,7 @@
                         <button type="button" class="menu-button btn-registro" onclick="window.location.href = 'registraClienteForm.jsp'">
                             Agregar Cliente
                         </button>
-                        <button type="button" class="menu-button btn-volver" onclick="window.location.href = '${pageContext.request.contextPath}/views/modulo admin/menuAdmin.jsp'">
+                        <button type="button" class="menu-button btn-volver" onclick="window.location.href = '${pageContext.request.contextPath}/views/modulo_admin/menuAdmin.jsp'">
                             Volver
                         </button>
                     </div>

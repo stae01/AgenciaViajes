@@ -39,7 +39,7 @@
                         <span class="button-icon">🔧</span>
                         Administrar Clientes
                     </button>
-                    <button class="menu-button" onclick="window.location.href = '${pageContext.request.contextPath}/views/modulo admin/consultaReservas.jsp'">
+                    <button class="menu-button" onclick="window.location.href = '${pageContext.request.contextPath}/views/modulo_admin/consultaReservas.jsp'">
                         <span class="button-icon">📉</span>
                         Administrar Reservas
                     </button>

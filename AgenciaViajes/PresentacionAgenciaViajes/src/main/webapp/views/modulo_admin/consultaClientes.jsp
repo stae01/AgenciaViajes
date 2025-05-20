@@ -133,7 +133,7 @@
                     <% }%>
                 </div>
 
-                <button type="button" class="search-button" onclick="window.location.href = '${pageContext.request.contextPath}/views/modulo admin/menuAdmin.jsp'">Volver</button>
+                <button type="button" class="search-button" onclick="window.location.href = '${pageContext.request.contextPath}/views/modulo_admin/menuAdmin.jsp'">Volver</button>
             </div>
         </div>
             </main>

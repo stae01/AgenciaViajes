@@ -53,7 +53,7 @@
                         </div>
                         <div class="form-buttons">
                             <button type="submit" class="menu-button btn-guardar">Entrar</button>
-                            <button type="button" class="menu-button btn-registro" onclick="window.location.href = '${pageContext.request.contextPath}/views/modulo cliente/registraClienteForm.jsp'">Registrarse</button>
+                            <button type="button" class="menu-button btn-registro" onclick="window.location.href = '${pageContext.request.contextPath}/views/modulo_cliente/registraClienteForm.jsp'">Registrarse</button>
                         </div>
                     </form>
                 </div>
