@@ -79,10 +79,10 @@ public class ConsultarAvionesServlet extends HttpServlet {
             request.setAttribute("paginaActual", paginaActual);
             request.setAttribute("totalPaginas", totalPaginas);
 
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/views/modulo admin/consultaAviones.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/views/modulo_admin/consultaAviones.jsp");
             dispatcher.forward(request, response);
         } catch (Exception e) {
-            response.sendRedirect("/views/modulo admin/consultaAviones.jsp");
+            response.sendRedirect("/views/modulo_admin/consultaAviones.jsp");
         }
     }
 

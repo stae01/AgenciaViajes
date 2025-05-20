@@ -98,10 +98,10 @@ public class ManejaSesionServlet extends HttpServlet {
 
                 if (Boolean.TRUE.equals(clienteAutenticado.isIsAdmin()))
                 {
-                    response.sendRedirect(request.getContextPath() + "/views/modulo admin/menuAdmin.jsp?exito=true");
+                    response.sendRedirect(request.getContextPath() + "/views/modulo_admin/menuAdmin.jsp?exito=true");
                 } else
                 {
-                    response.sendRedirect(request.getContextPath() + "/views/modulo cliente/consultaVuelosCliente.jsp?exito=true");
+                    response.sendRedirect(request.getContextPath() + "/views/modulo_cliente/consultaVuelosCliente.jsp?exito=true");
                 }
 
             } else

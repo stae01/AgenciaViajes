@@ -21,4 +21,10 @@ public interface VueloFachada {
     void eliminarVuelo(Long idVuelo);
     int contarVuelos();
     List<Vuelo> consultarVuelos(int maxResults, int firstResult);
+    public int contarVuelosConFiltros(String origen, String destino, String fechaSalida);
+    public List<Vuelo> consultarVuelosConFiltros(String origen, String destino, String fechaSalida, int maxResults, int firstResult);
+    public List<String> obtenerOrígenesDisponibles();
+    public List<String> obtenerDestinosDisponibles();
+    List<String> obtenerFechasDisponibles(String origen, String destino) throws Exception;
+    public String obtenerImagenPorDestino(String destino);
 }

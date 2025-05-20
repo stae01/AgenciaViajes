@@ -86,11 +86,11 @@ public class ConsultarVuelosServlet extends HttpServlet {
             request.setAttribute("paginaActual", paginaActual);
             request.setAttribute("totalPaginas", totalPaginas);
 
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/views/modulo admin/consultaVuelos.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/views/modulo_admin/consultaVuelos.jsp");
             dispatcher.forward(request, response);
         } catch (Exception e)
         {
-            response.sendRedirect("/views/modulo admin/consultaVuelos.jsp");
+            response.sendRedirect("/views/modulo_admin/consultaVuelos.jsp");
         }
     }
 

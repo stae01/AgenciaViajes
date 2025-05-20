@@ -70,9 +70,9 @@ public class AgregarClienteServlet extends HttpServlet {
             ClienteFachada clienteFachada = new ClienteFachadaImpl();
             clienteFachada.guardarCliente(cliente);
 
-            response.sendRedirect(request.getContextPath() + "/views/modulo cliente/registraClienteForm.jsp?exito=true");
+            response.sendRedirect(request.getContextPath() + "/views/modulo_cliente/registraClienteForm.jsp?exito=true");
         } catch (Exception e) {
-           response.sendRedirect(request.getContextPath() + "/views/modulo cliente/registraClienteForm.jsp?error=true");
+           response.sendRedirect(request.getContextPath() + "/views/modulo_cliente/registraClienteForm.jsp?error=true");
         }
     }
 

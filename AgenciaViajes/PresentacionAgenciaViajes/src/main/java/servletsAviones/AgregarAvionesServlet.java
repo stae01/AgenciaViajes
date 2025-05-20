@@ -57,9 +57,9 @@ public class AgregarAvionesServlet extends HttpServlet {
 
         // Redirigir según el resultado
         if (exito) {
-            response.sendRedirect(request.getContextPath() + "/views/modulo admin/agregarAvionesForm.jsp?exito=true");
+            response.sendRedirect(request.getContextPath() + "/views/modulo_admin/agregarAvionesForm.jsp?exito=true");
         } else {
-            response.sendRedirect("/views/modulo admin/agregarAvionesForm.jsp?error=true");
+            response.sendRedirect("/views/modulo_admin/agregarAvionesForm.jsp?error=true");
         }
     }
     

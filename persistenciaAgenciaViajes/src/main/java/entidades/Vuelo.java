@@ -17,6 +17,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
+import javax.persistence.Transient;
 
 /**
  *
@@ -140,13 +141,11 @@ public class Vuelo implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Vuelo))
-        {
+        if (!(object instanceof Vuelo)) {
             return false;
         }
         Vuelo other = (Vuelo) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)))
-        {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -165,6 +164,17 @@ public class Vuelo implements Serializable {
         sb.append(", reservas=").append(reservas);
         sb.append('}');
         return sb.toString();
+    }
+
+    @Transient
+    private String imagenUrl;
+
+    public String getImagenUrl() {
+        return imagenUrl;
+    }
+
+    public void setImagenUrl(String imagenUrl) {
+        this.imagenUrl = imagenUrl;
     }
 
 }

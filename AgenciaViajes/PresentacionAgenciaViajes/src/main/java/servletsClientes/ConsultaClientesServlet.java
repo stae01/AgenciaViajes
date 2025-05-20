@@ -71,10 +71,10 @@ public class ConsultaClientesServlet extends HttpServlet{
             request.setAttribute("paginaActual", paginaActual);
             request.setAttribute("totalPaginas", totalPaginas);
 
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/views/modulo admin/consultaClientes.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/views/modulo_admin/consultaClientes.jsp");
             dispatcher.forward(request, response);
         } catch (Exception e) {
-            response.sendRedirect("/views/modulo admin/menuAdmin.jsp");
+            response.sendRedirect("/views/modulo_admin/menuAdmin.jsp");
         }
     }
 

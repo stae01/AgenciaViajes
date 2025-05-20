@@ -32,5 +32,15 @@ public interface IVueloDAO {
     List<Vuelo> obtenerVuelos(boolean all, int maxResults, int firstResult);
     
     int obtieneTotalVuelos();
-
+    
+    public int contarVuelosConFiltros(String origen, String destino, String fechaSalida) throws PersistenciaException;
+    
+    public List<Vuelo> obtenerVuelosConFiltros(String origen, String destino, String fechaSalida, int maxResults, int firstResult) throws PersistenciaException;
+    
+    public List<String> obtenerOrígenesDisponibles() throws PersistenciaException;
+    
+    public List<String> obtenerDestinosDisponibles() throws PersistenciaException;
+    
+    List<String> obtenerFechasDisponibles(String origen, String destino) throws PersistenciaException;
+    
 }

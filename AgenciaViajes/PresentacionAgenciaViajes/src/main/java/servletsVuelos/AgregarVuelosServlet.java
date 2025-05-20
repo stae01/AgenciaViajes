@@ -103,10 +103,10 @@ public class AgregarVuelosServlet extends HttpServlet {
             vueloFachada.crearVuelo(vuelo);
 
             // Redirigir al formulario con un mensaje de éxito
-            response.sendRedirect(request.getContextPath() + "/views/modulo admin/agregarVueloForm.jsp?exito=true");
+            response.sendRedirect(request.getContextPath() + "/views/modulo_admin/agregarVueloForm.jsp?exito=true");
         } catch (Exception e) {
             // En caso de error, redirigir al formulario con un mensaje de error
-            response.sendRedirect(request.getContextPath() + "/views/modulo admin/agregarVueloForm.jsp?error=true");
+            response.sendRedirect(request.getContextPath() + "/views/modulo_admin/agregarVueloForm.jsp?error=true");
         }
     }
 

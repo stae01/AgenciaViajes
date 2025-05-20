@@ -41,8 +41,20 @@
         <servlet-name>ConsultarVuelosClienteServlet</servlet-name>
         <servlet-class>servletsVuelos.ConsultarVuelosClienteServlet</servlet-class>
     </servlet>
-    
-    
+    <servlet>
+        <servlet-name>FechasDisponiblesServlet</servlet-name>
+        <servlet-class>servletsVuelos.FechasDisponiblesServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RegistrarReservaServlet</servlet-name>
+        <servlet-class>servletsReservas.RegistrarReservaServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CargarVueloServlet</servlet-name>
+        <servlet-class>servletsVuelos.CargarVueloServlet</servlet-class>
+    </servlet>
+   
+   
     <servlet-mapping>
         <servlet-name>AgregarClienteServlet</servlet-name>
         <url-pattern>/agregarClienteServlet</url-pattern>
@@ -83,6 +95,20 @@
         <servlet-name>ConsultarVuelosClienteServlet</servlet-name>
         <url-pattern>/consultarVuelosClienteServlet</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FechasDisponiblesServlet</servlet-name>
+        <url-pattern>/FechasDisponiblesServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RegistrarReservaServlet</servlet-name>
+        <url-pattern>/registrarReservaServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CargarVueloServlet</servlet-name>
+        <url-pattern>/cargarVueloServlet</url-pattern>
+    </servlet-mapping>
+    
+
     
     
     <session-config>
