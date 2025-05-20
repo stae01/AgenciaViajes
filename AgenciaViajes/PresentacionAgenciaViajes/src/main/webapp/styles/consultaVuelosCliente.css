@@ -144,6 +144,16 @@ body {
     box-shadow: 0 4px 10px rgba(0,119,182,0.3);
 }
 
+.search-button:hover {
+    background-color: #005d91;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0,119,182,0.4);
+}
+
+.search-button:active {
+    transform: translateY(0);
+}
+
 menu-button{
     background-color: var(--color-primary);
     color: white;
@@ -158,16 +168,6 @@ menu-button{
     align-items: center;
     gap: 8px;
     box-shadow: 0 4px 10px rgba(0,119,182,0.3);
-}
-
-.search-button:hover {
-    background-color: #005d91;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(0,119,182,0.4);
-}
-
-.search-button:active {
-    transform: translateY(0);
 }
 
 /* Filtros */
@@ -569,10 +569,10 @@ tr:hover td {
     max-width: 180px;
     height: auto;
     display: block;
-    margin: 0 auto 20px auto; 
-    border-radius: 10px; 
-    object-fit: cover; 
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
+    margin: 0 auto 20px auto;
+    border-radius: 10px;
+    object-fit: cover;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .card {
@@ -581,16 +581,16 @@ tr:hover td {
     border: 2px solid var(--color-secondary);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
     width: 320px;
-    padding: 25px; 
+    padding: 25px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    overflow: hidden; 
+    overflow: hidden;
 }
 
 .card-content {
     display: flex;
     flex-direction: column;
-    gap: 12px; 
-    text-align: center; 
+    gap: 12px;
+    text-align: center;
 }
 
 .cards-container {
@@ -644,7 +644,7 @@ tr:hover td {
     }
 
     .card-image {
-        max-width: 140px; 
+        max-width: 140px;
     }
 }
 
@@ -656,7 +656,7 @@ tr:hover td {
     }
 
     .card-image {
-        max-width: 100px; 
+        max-width: 100px;
     }
 
     .card-content h3 {

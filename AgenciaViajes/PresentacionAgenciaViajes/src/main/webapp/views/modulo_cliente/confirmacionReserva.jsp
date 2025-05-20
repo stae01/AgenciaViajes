@@ -21,42 +21,67 @@
             String mensaje = (String) request.getAttribute("mensaje");
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
-            if (reserva == null) {
-                response.sendRedirect(request.getContextPath() + "/consultarVuelosClienteServlet");
-                return;
-            }
-        %>
+    if (reserva == null) {
+        response.sendRedirect(request.getContextPath() + "/consultarVuelosClienteServlet");
+        return;
+    }
 
-        <header class="header">
-            <img src="${pageContext.request.contextPath}/images/logo.png" alt="Logo Good Riddance" class="logo">
-            <div class="header-buttons">
-                <button class="search-button" onclick="window.location.href = '${pageContext.request.contextPath}/manejaSesionServlet?accion=logout'">
-                    <span class="button-icon">🔒</span> Cerrar Sesión
-                </button>
-            </div>
-        </header>
+    // Determinar si el mensaje es de éxito
+    boolean esExito = mensaje == null || (mensaje != null && mensaje.toLowerCase().contains("exitosamente"));
+%>
+<header class="header">
+    <img src="${pageContext.request.contextPath}/images/logo.png" alt="Logo Good Riddance" class="logo">
+    <button class="search-button" onclick="window.location.href = '${pageContext.request.contextPath}/manejaSesionServlet?accion=logout'">
+        <span class="button-icon">🔒</span>
+        Cerrar Sesión
+    </button>
+</header>
 
-        <main class="main-content">
-            <div class="content-container">
+<main class="main-content">
+    <div class="content-container">
+        <div class="image-panel">
+            <img src="${pageContext.request.contextPath}/images/imagenFormularioCliente.jpeg" alt="Imagen de viaje" class="travel-image">
+        </div>
 
-                <div class="image-panel">
-                    <img src="${pageContext.request.contextPath}/images/imagenFormularioCliente.jpeg" alt="Imagen de viaje" class="travel-image">
+        <div class="form-panel">
+            <% if (esExito) { %>
+                <h2 class="menu-title">✅<%= mensaje != null ? mensaje : "Reserva confirmada" %></h2>
+                <div class="alerta" id="alertaCampos"></div>
+            <% } else { %>
+                <h2 class="menu-title">Confirmación de Reserva</h2>
+                <div class="alerta" id="alertaCampos" style="display: block;"><%= mensaje %></div>
+            <% } %>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <p class="summary-item"><strong class="summary-label">Cliente:</strong> <span class="summary-value"><%= reserva.getCliente().getNombres() %></span></p>
                 </div>
-
-                <div class="form-panel">
-                    <h2 class="menu-title"><%= mensaje != null ? mensaje : "Reserva confirmada"%></h2>
-
-                    <p><strong>Cliente:</strong> <%= reserva.getCliente().getNombres()%></p>
-                    <p><strong>Vuelo:</strong> <%= reserva.getVuelo().getOrigen()%> → <%= reserva.getVuelo().getDestino()%></p>
-                    <p><strong>Fecha de salida:</strong> <%= sdf.format(reserva.getVuelo().getFechaSalida())%></p>
-                    <p><strong>Fecha de llegada:</strong> <%= sdf.format(reserva.getVuelo().getFechaLlegada())%></p>
-                    <p><strong>Cantidad de pasajeros:</strong> <%= reserva.getCantidadPasajeros()%></p>
-
-                    <a href="${pageContext.request.contextPath}/consultarVuelosClienteServlet" class="menu-button btn-cancelar">Volver a Vuelos</a>
-                </div>
-
             </div>
-        </main>
+            <div class="form-row">
+                <div class="form-group">
+                    <p class="summary-item"><strong class="summary-label">Vuelo:</strong> <span class="summary-value"><%= reserva.getVuelo().getOrigen() %> → <%= reserva.getVuelo().getDestino() %></span></p>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <p class="summary-item"><strong class="summary-label">Fecha de salida:</strong> <span class="summary-value"><%= sdf.format(reserva.getVuelo().getFechaSalida()) %></span></p>
+                </div>
+                <div class="form-group">
+                    <p class="summary-item"><strong class="summary-label">Fecha de llegada:</strong> <span class="summary-value"><%= sdf.format(reserva.getVuelo().getFechaLlegada()) %></span></p>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <p class="summary-item"><strong class="summary-label">Cantidad de pasajeros:</strong> <span class="summary-value"><%= reserva.getCantidadPasajeros() %></span></p>
+                </div>
+            </div>
+
+            <div class="form-buttons">
+                <a href="${pageContext.request.contextPath}/consultarVuelosClienteServlet" class="menu-button btn-cancelar">Volver a Vuelos</a>
+            </div>
+        </div>
+    </div>
+</main>
 
     </body>
 </html>
