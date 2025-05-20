@@ -53,7 +53,13 @@
         <servlet-name>CargarVueloServlet</servlet-name>
         <servlet-class>servletsVuelos.CargarVueloServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ConsultarReservasClienteServlet</servlet-name>
+        <servlet-class>servletsReservas.ConsultarReservasClienteServlet</servlet-class>
+    </servlet>
    
+   
+       
    
     <servlet-mapping>
         <servlet-name>AgregarClienteServlet</servlet-name>
@@ -107,7 +113,11 @@
         <servlet-name>CargarVueloServlet</servlet-name>
         <url-pattern>/cargarVueloServlet</url-pattern>
     </servlet-mapping>
-    
+    <servlet-mapping>
+        <servlet-name>ConsultarReservasClienteServlet</servlet-name>
+        <url-pattern>/consultarReservasClienteServlet</url-pattern>
+    </servlet-mapping>
+
 
     
     
