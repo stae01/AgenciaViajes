@@ -57,6 +57,10 @@
         <servlet-name>ConsultarReservasClienteServlet</servlet-name>
         <servlet-class>servletsReservas.ConsultarReservasClienteServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EliminarVuelosServlet</servlet-name>
+        <servlet-class>servletsVuelos.EliminarVuelosServlet</servlet-class>
+    </servlet>
    
    
        
@@ -117,7 +121,10 @@
         <servlet-name>ConsultarReservasClienteServlet</servlet-name>
         <url-pattern>/consultarReservasClienteServlet</url-pattern>
     </servlet-mapping>
-
+    <servlet-mapping>
+        <servlet-name>EliminarVuelosServlet</servlet-name>
+        <url-pattern>/eliminarVuelosServlet</url-pattern>
+    </servlet-mapping>
 
     
     

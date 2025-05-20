@@ -69,7 +69,7 @@
                                         <input type="hidden" name="idVuelo" value="<%= vuelo.getId()%>" />
                                         <button class="action-button info-button">i</button>
                                     </form>
-                                    <form action="${pageContext.request.contextPath}/eliminarVueloServlet" method="POST" style="display:inline;">
+                                    <form action="${pageContext.request.contextPath}/eliminarVuelosServlet" method="POST" style="display:inline;">
                                         <input type="hidden" name="idVuelo" value="<%= vuelo.getId()%>" />
                                         <button type="submit" class="action-button delete-button">×</button>
                                     </form>
