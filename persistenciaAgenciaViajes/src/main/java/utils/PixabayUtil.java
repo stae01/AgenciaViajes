@@ -22,7 +22,7 @@ import org.json.JSONObject;
  * @author pauli
  */
 public class PixabayUtil {
-    private static final String API_KEY = "50393076-cf2df96a4e23436ea5716b20f"; // Pon tu key real aquí
+    private static final String API_KEY = "API_KEY"; // Pon tu key aquí
     private static final String BASE_URL = "https://pixabay.com/api/";
 
     private Gson gson = new Gson();

@@ -33,7 +33,7 @@ public class ManejaSesionServlet extends HttpServlet {
             {
                 Cliente nuevoAdmin = new Cliente();
                 nuevoAdmin.setNombres("Administrador");
-                nuevoAdmin.setEmail("admin");
+                nuevoAdmin.setEmail("admin@gmail.com");
                 nuevoAdmin.setPassword("admin123");
                 nuevoAdmin.setIsAdmin(true);
                 clienteFachada.guardarCliente(nuevoAdmin);
