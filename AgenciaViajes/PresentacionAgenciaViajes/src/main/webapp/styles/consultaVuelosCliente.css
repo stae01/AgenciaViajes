@@ -85,6 +85,15 @@ body {
     position: relative;
 }
 
+
+.imagenDestinoContainer img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+
 .title-card h1 {
     font-size: 1.8rem;
     color: var(--color-primary);

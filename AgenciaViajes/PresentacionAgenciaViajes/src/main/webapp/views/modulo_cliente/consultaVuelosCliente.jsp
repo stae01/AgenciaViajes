@@ -1,3 +1,4 @@
+<%@page import="entidades.VueloConImagen"%>
 <%@ page import="entidades.Vuelo" %>
 <%@ page import="java.util.List" %>
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
@@ -89,14 +90,22 @@
                     </form>
 
                     <div class="cards-container">
+                        
                         <%
-                            List<Vuelo> vuelos = (List<Vuelo>) request.getAttribute("vuelos");
-                            if (vuelos != null && !vuelos.isEmpty()) {
-                                for (Vuelo vuelo : vuelos) {
+                            List<VueloConImagen> vuelosConImagen = (List<VueloConImagen>) request.getAttribute("vuelosConImagen");
+                            if (vuelosConImagen != null && !vuelosConImagen.isEmpty()) {
+                                for (VueloConImagen vueloConImagen : vuelosConImagen) {
+                                    Vuelo vuelo = vueloConImagen.getVuelo();
+                                    String imagen = vueloConImagen.getUrlImagen();
                         %>
                         <div class="card">
                             <div class="card-content">
-                                <img src="${pageContext.request.contextPath}/images/Cancun.jpeg" alt="Vuelo" class="card-image" />
+
+                                <div class="imagenDestinoContainer">
+                                    <img src="<%= imagen != null ? imagen : request.getContextPath() + "/images/default-image.jpg"%>"
+                                         alt="Imagen de destino"
+                                         style="max-width: 100%; height: auto; border-radius: 8px;">
+                                </div>                       
                                 <h3>Origen: <%= vuelo.getOrigen()%></h3>
                                 <h3>Destino: <%= vuelo.getDestino()%></h3>
                                 <p>Salida: <%= vuelo.getFechaSalida()%></p>
