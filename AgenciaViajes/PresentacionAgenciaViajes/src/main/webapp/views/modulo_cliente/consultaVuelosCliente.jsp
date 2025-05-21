@@ -1,3 +1,5 @@
+<%@page import="java.util.Locale"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="entidades.VueloConImagen"%>
 <%@ page import="entidades.Vuelo" %>
 <%@ page import="java.util.List" %>
@@ -90,7 +92,7 @@
                     </form>
 
                     <div class="cards-container">
-                        
+
                         <%
                             List<VueloConImagen> vuelosConImagen = (List<VueloConImagen>) request.getAttribute("vuelosConImagen");
                             if (vuelosConImagen != null && !vuelosConImagen.isEmpty()) {
@@ -108,8 +110,27 @@
                                 </div>                       
                                 <h3>Origen: <%= vuelo.getOrigen()%></h3>
                                 <h3>Destino: <%= vuelo.getDestino()%></h3>
-                                <p>Salida: <%= vuelo.getFechaSalida()%></p>
-                                <p>Llegada: <%= vuelo.getFechaLlegada()%></p>
+
+                                <%
+                                    // Crear dos objetos SimpleDateFormat: uno para la hora y otro para el día
+                                    SimpleDateFormat horaFormat = new SimpleDateFormat("HH:mm");
+                                    SimpleDateFormat diaFormat = new SimpleDateFormat("EEEE dd 'de' MMMM 'de' yyyy", new Locale("es", "ES"));
+
+                                    // Formatear las fechas de salida y llegada
+                                    String horaSalida = horaFormat.format(vuelo.getFechaSalida());
+                                    String diaSalida = diaFormat.format(vuelo.getFechaSalida());
+                                    String horaLlegada = horaFormat.format(vuelo.getFechaLlegada());
+                                    String diaLlegada = diaFormat.format(vuelo.getFechaLlegada());
+                                %>
+
+                                <p><strong>Salida:</strong></p>
+                                <p>Hora: <%= horaSalida%></p>
+                                <p>Día: <%= diaSalida%></p>
+
+                                <p><strong>Llegada:</strong></p>
+                                <p>Hora: <%= horaLlegada%></p>
+                                <p>Día: <%= diaLlegada%></p>
+
                                 <div class="card-actions">
                                     <form action="${pageContext.request.contextPath}/cargarVueloServlet" method="get">
                                         <input type="hidden" name="idVuelo" value="<%= vuelo.getId()%>" />
