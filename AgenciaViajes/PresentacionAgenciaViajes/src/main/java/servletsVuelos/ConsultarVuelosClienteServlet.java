@@ -128,7 +128,7 @@ public class ConsultarVuelosClienteServlet extends HttpServlet {
     private String obtenerImagenDestino(String destino) {
         String PIXABAY_API_KEY = "50393076-cf2df96a4e23436ea5716b20f"; 
         String url = "https://pixabay.com/api/?key=" + PIXABAY_API_KEY
-                   + "&q=" + destino + "&image_type=photo&per_page=1";
+                   + "&q=" + destino + "&image_type=photo&per_page=10";
 
         try {
             URL obj = new URL(url);
